@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+<li class="breadcrumb-item">
+    <a href="{% url 'participation:clubs_list' %}">
+        {% trans "clubs" %}
+    </a>
+</li>
+
+<li class="breadcrumb-item">
+    <a href="{% url 'participation:club_view' club_id=club.id %}">
+        {{ club.title }}
+    </a>
+</li>
+
+<li class="breadcrumb-item active">
+    {% trans "edit club" %}
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+    <div class="card card-form">
+        <div class="card-header">
+            {% trans "properties" %}
+        </div>
+        <div class="card-body">
+            <form method="post" action="{% url 'participation:club_edit' club_id=club.id %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input name="" type="submit" class="btn btn-primary" value="{% trans 'edit' %}" />
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-sm-3"></div>
+{% endblock %}

@@ -1,0 +1,103 @@
+@font-face {
+    font-family: IRANSans;
+    src: url(../fonts/IRANSans.ttf);
+}
+
+body {
+    min-height: 100%;
+    font-family: IRANSans;
+    overflow-x: hidden;
+}
+
+#symlist {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#content {
+    min-height: 100%;
+    border-left: 1px solid #444;
+    padding-top: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+.symcard {
+    margin: 10px;
+    dir: rtl;
+    text-align: right;
+    font-size: 85%;
+}
+
+.fill-h {
+    height: 100%;
+}
+
+.table > tbody,thead > tr > td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.icon {
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}
+
+.icon-white {
+    filter: invert(100%);
+}
+
+.card-icon {
+    float: left;
+    margin-right: 10px;
+}
+
+.card-symbol-name {
+    .display: inline-block;
+}
+
+#notif-box {
+    position: fixed;
+    bottom: 0;
+    margin-left: 1vh;
+}
+
+.menu-item {
+    text-align: right;
+    padding-right: 20px;
+    width: 100%;
+}
+
+.sidebar-hr {
+    margin: 5px;
+    background: lightblue;
+}
+
+.logo {
+    width: 150%;
+    margin-right: -23%;
+}
+
+.text-menuitem {
+    color: white;
+    width: 100%;
+    text-align: right;
+}
+
+.menu-dropdown {
+    width: 100%;
+}
+
+.card-form {
+}
+
+.club-card {
+    margin: 10px;
+    display: inline-block;
+}
+
+.club-ops-hr {
+    width: 70%;
+}
+

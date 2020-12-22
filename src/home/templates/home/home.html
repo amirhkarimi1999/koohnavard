@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load i18n %}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+          content="Kooh is a business focused HTML landing page template built with Bootstrap to help you create lead generation websites for companies and their services.">
+    <meta name="author" content="Inovatik">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+    <meta property="og:site_name" content=""/> <!-- website name -->
+    <meta property="og:site" content=""/> <!-- website link -->
+    <meta property="og:title" content=""/> <!-- title shown in the actual shared post -->
+    <meta property="og:description" content=""/> <!-- description shown in the actual shared post -->
+    <meta property="og:image" content=""/> <!-- image link, make sure it's jpg -->
+    <meta property="og:url" content=""/> <!-- where do you want your post to link to -->
+    <meta property="og:type" content="article"/>
+
+    <!-- Website Title -->
+    <title>Kooh - Business HTML Landing Page Template</title>
+
+    <!-- Styles -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:500,700&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600&display=swap&subset=latin-ext"
+          rel="stylesheet">
+    <link href="{% static 'css//bootstrap.css'%}" rel="stylesheet">
+    <link href="{% static 'css//fontawesome-all.css'%}" rel="stylesheet">
+    <link href="{% static 'css//swiper.css'%}" rel="stylesheet">
+    <link href="{% static 'css//magnific-popup.css'%}" rel="stylesheet">
+    <link href="{% static 'css//styles.css'%}" rel="stylesheet">
+
+    <!-- Favicon  -->
+    <link rel="icon" href="{%static 'images/favicon.png'%}">
+</head>
+<body data-spy="scroll" data-target=".fixed-top">
+
+<!-- Preloader -->
+<div class="spinner-wrapper">
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+</div>
+<!-- end of preloader -->
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-md navbar-dark navbar-custom fixed-top">
+    <!-- Text Logo - Use this if you don't have a graphic logo -->
+    <!-- <a class="navbar-brand logo-text page-scroll" href="home.html">Kooh</a> -->
+
+    <p class="nav-item" style="padding: 0px 0px">
+        <a class="nav-link" href="{% url 'accounts:login' %}">ورود</a>
+    </p>
+    <!-- Mobile Menu Toggle Button -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+            Kooh-controls="navbarsExampleDefault" Kooh-expanded="false" Kooh-label="Toggle navigation">
+        <span class="navbar-toggler-awesome fas fa-bars"></span>
+        <span class="navbar-toggler-awesome fas fa-times"></span>
+    </button>
+    <!-- end of mobile menu toggle button -->
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault" dir="rtl">
+        <img src="{% static 'pics/logo.png' %}" class="logo" width="60" height="60">
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="#header">خانه <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="#intro">معرفی</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="#projects">برنامه ها</a>
+            </li>
+
+            <!-- Dropdown Menu -->
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="#about" id="navbarDropdown" role="button" Kooh-haspopup="true"
+                   Kooh-expanded="false">درباره ما</a>
+            </li>
+            <!-- end of dropdown menu -->
+
+            <li class="nav-item">
+                <a class="nav-link page-scroll" href="#contact">تماس با ما</a>
+            </li>
+            <!-- Image Logo -->
+        </ul>
+
+    </div>
+
+</nav> <!-- end of navbar -->
+<!-- end of navbar -->
+
+
+<!-- Header -->
+<header id="header" class="header">
+    <div class="header-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-container" dir="rtl">
+                        <h1>برنامه ریزی <span id="js-rotating" dir="rtl">تور, کوهنوردی, ورزشی</span></h1>
+                        <p class="p-heading p-large" dir="rtl">می توانید از کوه برای پیدا کردن برنامه ها و گروه های مورد
+                            علاقه خود استفاده کنید.</p>
+                        <a class="btn-solid-lg page-scroll" href="{% url 'accounts:register' %}">پایم :)</a>
+                    </div>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </div> <!-- end of header-content -->
+</header> <!-- end of header -->
+<!-- end of header -->
+
+
+<!-- Intro -->
+<div id="intro" class="basic-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5" dir="rtl">
+                <div class="text-container" style="text-align:right;">
+                    <div class="section-title" dir="rtl">معرفی</div>
+                    <h2>ما بهترین برنامه های کوهنوردی رو به شما پیشنهاد می دیم.</h2>
+                    <p>پیدا کردن یک برنامه مناسب در زمان ها ممکنه کمی سخت با شه.</p>
+                    <p class="testimonial-text">"مسیولیت ما در کوه اینه که بهترین، حرفه ای ترین، شاد ترین برنامه ها رو
+                        برای شما فراهم کنیم."</p>
+                    <div class="testimonial-author">علی کوهپناه - مدیر</div>
+                </div> <!-- end of text-container -->
+            </div> <!-- end of col -->
+            <div class="col-lg-7">
+                <div class="image-container">
+                    <img class="img-fluid" src="{%static 'images/intro-office.jpg'%}" alt="alternative">
+                </div> <!-- end of image-container -->
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of basic-1 -->
+<!-- end of intro -->
+
+
+<!-- Description -->
+<div class="cards-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <!--                &lt;!&ndash; Card &ndash;&gt;-->
+                <!--                <div class="card">-->
+                <!--                        <span class="fa-stack">-->
+                <!--                            <span class="hexagon"></span>-->
+                <!--                            <i class="fas fa-binoculars fa-stack-1x"></i>-->
+                <!--                        </span>-->
+                <!--                    <div class="card-body">-->
+                <!--                        <h4 class="card-title">Environment Analysis</h4>-->
+                <!--                        <p>The starting point of any success story is knowing your current position in the business-->
+                <!--                            environment</p>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                &lt;!&ndash; end of card &ndash;&gt;-->
+
+                <!--                &lt;!&ndash; Card &ndash;&gt;-->
+                <!--                <div class="card">-->
+                <!--                        <span class="fa-stack">-->
+                <!--                            <span class="hexagon"></span>-->
+                <!--                            <i class="fas fa-list-alt fa-stack-1x"></i>-->
+                <!--                        </span>-->
+                <!--                    <div class="card-body">-->
+                <!--                        <h4 class="card-title">Development Planning</h4>-->
+                <!--                        <p>After completing the environmental analysis the next stage is to design and plan your-->
+                <!--                            development strategy</p>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                &lt;!&ndash; end of card &ndash;&gt;-->
+
+                <!--                &lt;!&ndash; Card &ndash;&gt;-->
+                <!--                <div class="card">-->
+                <!--                        <span class="fa-stack">-->
+                <!--                            <span class="hexagon"></span>-->
+                <!--                            <i class="fas fa-chart-pie fa-stack-1x"></i>-->
+                <!--                        </span>-->
+                <!--                    <div class="card-body">-->
+                <!--                        <h4 class="card-title">Execution & Evaluation</h4>-->
+                <!--                        <p>In this phase you will focus on executing the actions plan and evaluating the results after-->
+                <!--                            each marketing campaign</p>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--                &lt;!&ndash; end of card &ndash;&gt;-->
+
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of cards-1 -->
+<!-- end of description -->
+
+
+<!-- Projects -->
+<div id="projects" class="filter">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">{% trans "Plans" %}</div>
+                <h2>برنامه هایی که بهشون افتحار می کنیم</h2>
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- Filter -->
+                <div class="button-group filters-button-group">
+                    <a class="button is-checked" data-filter="*" href="{% url 'planning:all_plans_list'%}"><span>{% trans "All Plans"%}</span></a>
+                </div> <!-- end of button group -->
+                <div class="grid">
+                    <div class="element-item development">
+                        <a class="popup-with-move-anim" href="#project-1">
+                            <div class="element-item-overlay"><span>Online Banking</span></div>
+                            <img src="{%static 'images/project-1.jpg'%}" alt="alternative"></a>
+                    </div>
+                    <div class="element-item development">
+                        <a class="popup-with-move-anim" href="#project-2">
+                            <div class="element-item-overlay"><span>Classic Industry</span></div>
+                            <img src="{%static 'images/project-2.jpg'%}" alt="alternative"></a>
+                    </div>
+                    <div class="element-item design development marketing">
+                        <a class="popup-with-move-anim" href="#project-3">
+                            <div class="element-item-overlay"><span>BoomBap Audio</span></div>
+                            <img src="{%static 'images/project-3.jpg'%}" alt="alternative"></a>
+                    </div>
+                    <div class="element-item design development marketing">
+                        <a class="popup-with-move-anim" href="#project-4">
+                            <div class="element-item-overlay"><span>Van Moose</span></div>
+                            <img src="{%static 'images/project-4.jpg'%}" alt="alternative"></a>
+                    </div>
+                    <div class="element-item design development marketing seo">
+                        <a class="popup-with-move-anim" href="#project-5">
+                            <div class="element-item-overlay"><span>Joy Moments</span></div>
+                            <img src="{%static 'images/project-5.jpg'%}" alt="alternative"></a>
+                    </div>
+                    <div class="element-item design marketing seo">
+                        <a class="popup-with-move-anim" href="#project-6">
+                            <div class="element-item-overlay"><span>Spark Events</span></div>
+                            <img src="{%static 'images/project-6.jpg'%}" alt="alternative"></a>
+                    </div>
+                    <div class="element-item design marketing">
+                        <a class="popup-with-move-anim" href="#project-7">
+                            <div class="element-item-overlay"><span>Casual Wear</span></div>
+                            <img src="{%static 'images/project-7.jpg'%}" alt="alternative"></a>
+                    </div>
+                    <div class="element-item design marketing">
+                        <a class="popup-with-move-anim" href="#project-8">
+                            <div class="element-item-overlay"><span>Zazoo Apps</span></div>
+                            <img src="{%static 'images/project-8.jpg'%}" alt="alternative"></a>
+                    </div>
+                </div> <!-- end of grid -->
+                <!-- end of filter -->
+
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of filter -->
+<!-- end of projects -->
+
+
+<!-- Project Lightboxes -->
+<!-- Lightbox -->
+<div id="project-1" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div class="row">
+        <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+        <div class="col-lg-8">
+            <img class="img-fluid" src="{%static 'images/project-1.jpg'%}" alt="alternative">
+        </div> <!-- end of col -->
+        <div class="col-lg-4">
+            <h3>Online Banking</h3>
+            <hr class="line-heading">
+            <h6>Strategy Development</h6>
+            <p>Need a solid foundation for your business growth plans? Kooh will help you manage sales and meet your
+                current needs</p>
+            <p>By offering the best professional services and quality products in the market. Don't hesitate and get in
+                touch with us.</p>
+            <div class="testimonial-container">
+                <p class="testimonial-text">Need a solid foundation for your business growth plans? Kooh will help you
+                    manage sales and meet your current requirements.</p>
+                <p class="testimonial-author">General Manager</p>
+            </div>
+            <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button"
+                                                                      href="#projects">BACK</a>
+        </div> <!-- end of col -->
+    </div> <!-- end of row -->
+</div> <!-- end of lightbox-basic -->
+<!-- end of lightbox -->
+
+<!-- Lightbox -->
+<div id="project-2" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div class="row">
+        <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+        <div class="col-lg-8">
+            <img class="img-fluid" src="{%static 'images/project-2.jpg'%}" alt="alternative">
+        </div> <!-- end of col -->
+        <div class="col-lg-4">
+            <h3>Classic Industry</h3>
+            <hr class="line-heading">
+            <h6>Strategy Development</h6>
+            <p>Need a solid foundation for your business growth plans? Kooh will help you manage sales and meet your
+                current needs</p>
+            <p>By offering the best professional services and quality products in the market. Don't hesitate and get in
+                touch with us.</p>
+            <div class="testimonial-container">
+                <p class="testimonial-text">Need a solid foundation for your business growth plans? Kooh will help you
+                    manage sales and meet your current requirements.</p>
+                <p class="testimonial-author">General Manager</p>
+            </div>
+            <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button"
+                                                                      href="#projects">BACK</a>
+        </div> <!-- end of col -->
+    </div> <!-- end of row -->
+</div> <!-- end of lightbox-basic -->
+<!-- end of lightbox -->
+
+<!-- Lightbox -->
+<div id="project-3" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div class="row">
+        <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+        <div class="col-lg-8">
+            <img class="img-fluid" src="{%static 'images/project-3.jpg'%}" alt="alternative">
+        </div> <!-- end of col -->
+        <div class="col-lg-4">
+            <h3>BoomBap Audio</h3>
+            <hr class="line-heading">
+            <h6>Strategy Development</h6>
+            <p>Need a solid foundation for your business growth plans? Kooh will help you manage sales and meet your
+                current needs</p>
+            <p>By offering the best professional services and quality products in the market. Don't hesitate and get in
+                touch with us.</p>
+            <div class="testimonial-container">
+                <p class="testimonial-text">Need a solid foundation for your business growth plans? Kooh will help you
+                    manage sales and meet your current requirements.</p>
+                <p class="testimonial-author">General Manager</p>
+            </div>
+            <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button"
+                                                                      href="#projects">BACK</a>
+        </div> <!-- end of col -->
+    </div> <!-- end of row -->
+</div> <!-- end of lightbox-basic -->
+<!-- end of lightbox -->
+
+<!-- Lightbox -->
+<div id="project-4" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div class="row">
+        <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+        <div class="col-lg-8">
+            <img class="img-fluid" src="{%static 'images/project-4.jpg'%}" alt="alternative">
+        </div> <!-- end of col -->
+        <div class="col-lg-4">
+            <h3>Van Moose</h3>
+            <hr class="line-heading">
+            <h6>Strategy Development</h6>
+            <p>Need a solid foundation for your business growth plans? Kooh will help you manage sales and meet your
+                current needs</p>
+            <p>By offering the best professional services and quality products in the market. Don't hesitate and get in
+                touch with us.</p>
+            <div class="testimonial-container">
+                <p class="testimonial-text">Need a solid foundation for your business growth plans? Kooh will help you
+                    manage sales and meet your current requirements.</p>
+                <p class="testimonial-author">General Manager</p>
+            </div>
+            <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button"
+                                                                      href="#projects">BACK</a>
+        </div> <!-- end of col -->
+    </div> <!-- end of row -->
+</div> <!-- end of lightbox-basic -->
+<!-- end of lightbox -->
+
+<!-- Lightbox -->
+<div id="project-5" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div class="row">
+        <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+        <div class="col-lg-8">
+            <img class="img-fluid" src="{%static 'images/project-5.jpg'%}" alt="alternative">
+        </div> <!-- end of col -->
+        <div class="col-lg-4">
+            <h3>Joy Moments</h3>
+            <hr class="line-heading">
+            <h6>Strategy Development</h6>
+            <p>Need a solid foundation for your business growth plans? Kooh will help you manage sales and meet your
+                current needs</p>
+            <p>By offering the best professional services and quality products in the market. Don't hesitate and get in
+                touch with us.</p>
+            <div class="testimonial-container">
+                <p class="testimonial-text">Need a solid foundation for your business growth plans? Kooh will help you
+                    manage sales and meet your current requirements.</p>
+                <p class="testimonial-author">General Manager</p>
+            </div>
+            <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button"
+                                                                      href="#projects">BACK</a>
+        </div> <!-- end of col -->
+    </div> <!-- end of row -->
+</div> <!-- end of lightbox-basic -->
+<!-- end of lightbox -->
+
+<!-- Lightbox -->
+<div id="project-6" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div class="row">
+        <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+        <div class="col-lg-8">
+            <img class="img-fluid" src="{%static 'images/project-6.jpg'%}" alt="alternative">
+        </div> <!-- end of col -->
+        <div class="col-lg-4">
+            <h3>Spark Events</h3>
+            <hr class="line-heading">
+            <h6>Strategy Development</h6>
+            <p>Need a solid foundation for your business growth plans? Kooh will help you manage sales and meet your
+                current needs</p>
+            <p>By offering the best professional services and quality products in the market. Don't hesitate and get in
+                touch with us.</p>
+            <div class="testimonial-container">
+                <p class="testimonial-text">Need a solid foundation for your business growth plans? Kooh will help you
+                    manage sales and meet your current requirements.</p>
+                <p class="testimonial-author">General Manager</p>
+            </div>
+            <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button"
+                                                                      href="#projects">BACK</a>
+        </div> <!-- end of col -->
+    </div> <!-- end of row -->
+</div> <!-- end of lightbox-basic -->
+<!-- end of lightbox -->
+
+<!-- Lightbox -->
+<div id="project-7" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div class="row">
+        <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+        <div class="col-lg-8">
+            <img class="img-fluid" src="{%static 'images/project-7.jpg'%}" alt="alternative">
+        </div> <!-- end of col -->
+        <div class="col-lg-4">
+            <h3>Casual Wear</h3>
+            <hr class="line-heading">
+            <h6>Strategy Development</h6>
+            <p>Need a solid foundation for your business growth plans? Kooh will help you manage sales and meet your
+                current needs</p>
+            <p>By offering the best professional services and quality products in the market. Don't hesitate and get in
+                touch with us.</p>
+            <div class="testimonial-container">
+                <p class="testimonial-text">Need a solid foundation for your business growth plans? Kooh will help you
+                    manage sales and meet your current requirements.</p>
+                <p class="testimonial-author">General Manager</p>
+            </div>
+            <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button"
+                                                                      href="#projects">BACK</a>
+        </div> <!-- end of col -->
+    </div> <!-- end of row -->
+</div> <!-- end of lightbox-basic -->
+<!-- end of lightbox -->
+
+<!-- Lightbox -->
+<div id="project-8" class="lightbox-basic zoom-anim-dialog mfp-hide">
+    <div class="row">
+        <button title="Close (Esc)" type="button" class="mfp-close x-button">×</button>
+        <div class="col-lg-8">
+            <img class="img-fluid" src="{%static 'images/project-8.jpg'%}" alt="alternative">
+        </div> <!-- end of col -->
+        <div class="col-lg-4">
+            <h3>Zazoo Apps</h3>
+            <hr class="line-heading">
+            <h6>Strategy Development</h6>
+            <p>Need a solid foundation for your business growth plans? Kooh will help you manage sales and meet your
+                current needs</p>
+            <p>By offering the best professional services and quality products in the market. Don't hesitate and get in
+                touch with us.</p>
+            <div class="testimonial-container">
+                <p class="testimonial-text">Need a solid foundation for your business growth plans? Kooh will help you
+                    manage sales and meet your current requirements.</p>
+                <p class="testimonial-author">General Manager</p>
+            </div>
+            <a class="btn-solid-reg" href="#your-link">DETAILS</a> <a class="btn-outline-reg mfp-close as-button"
+                                                                      href="#projects">BACK</a>
+        </div> <!-- end of col -->
+    </div> <!-- end of row -->
+</div> <!-- end of lightbox-basic -->
+<!-- end of lightbox -->
+<!-- end of project lightboxes -->
+
+<!-- About -->
+<div id="about" class="counter" dir="rtl">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-xl-6">
+                <div class="image-container">
+                    <img class="img-fluid" src="{%static 'images/about.jpg'%}" alt="alternative">
+                </div> <!-- end of image-container -->
+            </div> <!-- end of col -->
+            <div class="col-lg-7 col-xl-6" style="text-align:right;">
+                <div class="text-container">
+                    <div class="section-title">درباره ما</div>
+                    <h2>ما ...</h2>
+                    <p>از اهداف ما</p>
+                    <ul class="list-unstyled li-space-lg" style="text-align:right;">
+                        <li class="media">
+                            <i class="fas fa-square" style="padding: 0px 10px"></i>
+
+                            <div class="media-body">تاثیرات مثبت ما</div>
+
+                        </li>
+                        <li class="media">
+                            <i class="fas fa-square" style="padding: 0px 10px"></i>
+
+                            <div class="media-body"> شما عضو مهمی از</div>
+
+                        </li>
+                    </ul>
+
+                    <!-- Counter -->
+                    <div id="counter">
+                        <div class="cell">
+                            <div class="counter-value number-count" data-count="{{ user_cnt }}">1</div>
+                            <div class="counter-info">{% trans "Happy" %}<br>{% trans "Users" %}</div>
+                        </div>
+                        <div class="cell">
+                            <div class="counter-value number-count" data-count="{{ club_cnt }}">1</div>
+                            <div class="counter-info">{% trans "Cool" %}<br>{% trans "Club" %}</div>
+                        </div>
+                        <div class="cell">
+                            <div class="counter-value number-count" data-count="{{ plan_cnt }}">1</div>
+                            <div class="counter-info">{% trans "Good" %}<br>{% trans "Plans" %}</div>
+                        </div>
+                    </div>
+                    <!-- end of counter -->
+
+                </div> <!-- end of text-container -->
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of counter -->
+<!-- end of about -->
+
+
+<!-- Contact -->
+<div id="contact" class="form-2" dir="rtl">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-container" dir="rtl" style="text-align: right">
+                    <div class="section-title">تماس با ما</div>
+                    <ul class="list-unstyled li-space-lg">
+                        <li class="address"><i class="fas fa-map-marker-alt"></i>ادرس دفتر ما .... نداریم بیا کوه:)
+                        </li>
+                        <li><i class="fas fa-phone"></i><a href="tel:003024630820">+98 123 456 78 90</a></li>
+                        <li><i class="fas fa-phone"></i><a href="tel:003024630820">+98 123 456 78 90</a></li>
+                        <li><i class="fas fa-envelope"></i><a href="mailto:office@Kooh.com">kooh@gmail.com</a></li>
+                    </ul>
+                    <div>
+                    <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-facebook-f fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-twitter fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-pinterest fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-instagram fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-linkedin-in fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="#your-link">
+                                <span class="hexagon"></span>
+                                <i class="fab fa-behance fa-stack-1x"></i>
+                            </a>
+                        </span>
+                    </div>
+                </div> <!-- end of text-container -->
+            </div> <!-- end of col -->
+            <div class="col-lg-6">
+
+            </div> <!-- end of col -->
+        </div> <!-- end of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of form-2 -->
+<!-- end of contact -->
+
+
+<!-- Copyright -->
+<div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="p-small">Copyright © 2020 <a href="https://inovatik.com">Template by Inovatik</a></p>
+            </div> <!-- end of col -->
+        </div> <!-- enf of row -->
+    </div> <!-- end of container -->
+</div> <!-- end of copyright -->
+<!-- end of copyright -->
+
+
+<!-- Scripts -->
+<script src="{%static 'js/jquery.min.js'%}"></script> <!-- jQuery for Bootstrap's JavaScript plugins -->
+<script src="{%static 'js/popper.min.js'%}"></script> <!-- Popper tooltip library for Bootstrap -->
+<script src="{%static 'js/bootstrap.min.js'%}"></script> <!-- Bootstrap framework -->
+<script src="{%static 'js/jquery.easing.min.js'%}"></script> <!-- jQuery Easing for smooth scrolling between anchors -->
+<script src="{%static 'js/swiper.min.js'%}"></script> <!-- Swiper for image and text sliders -->
+<script src="{%static 'js/jquery.magnific-popup.js'%}"></script> <!-- Magnific Popup for lightboxes -->
+<script src="{%static 'js/morphext.min.js'%}"></script> <!-- Morphtext rotating text in the header -->
+<script src="{%static 'js/isotope.pkgd.min.js'%}"></script> <!-- Isotope for filter -->
+<script src="{%static 'js/validator.min.js'%}"></script> <!-- Validator.js - Bootstrap plugin that validates forms -->
+<script src="{%static 'js/scripts.js'%}"></script> <!-- Custom scripts -->
+</body>
+</html>

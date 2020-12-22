@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+<li class="breadcrumb-item">
+    <a href="{% url 'planning:all_plans_list' %}">
+        {% trans "plans" %}
+    </a>
+</li>
+
+<li class="breadcrumb-item active">
+    {{ plan.title }}
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-3" style="text-align: center;">
+    <br/>
+    {% if plan_participant.plan.head_man_user != request.user and plan_participant.plan.club.owner != request.user or plan_participant is None %}
+        {% if plan_participant is None or plan_participant.status != "ACCEPTED" %}
+            <a href="{% url 'planning:plan_participant_preregister' plan_id=plan.id %}" class="text-success">
+                {% trans "join request" %}
+            </a>
+        {% elif plan_participant.status == "PENDING" %}
+            <a href="{% url 'planning:answer_plan_join_request' req_id=plan_participant.id accept='REJECT' %}" class="text-danger">
+                {% trans "cancel request" %}
+            </a>
+        {% endif %}
+
+    {% else %}
+        <a href="{% url 'planning:plan_edit' plan_id=plan.id %}">
+            {% trans "edit" %}
+        </a>
+        <hr class="club-ops-hr">
+    {% endif %}
+</div>
+<div class="col-sm-7">
+    <br/>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th scope="row">
+                {% trans "title" %}
+            </th>
+            <td>
+                {{ plan.title }}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {% trans "description" %}
+            </th>
+            <td>
+                {{ plan.description }}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {% trans "destination_address" %}
+            </th>
+            <td>
+                {{ plan.destination_address }}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {% trans "group_link" %}
+            </th>
+            <td>
+                {{ plan.group_link }}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {% trans "start_datetime" %}
+            </th>
+            <td>
+                {{ plan.start_datetime }}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {% trans "club" %}
+            </th>
+            <td>
+                {{ plan.club }}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {% trans "head_man" %}
+            </th>
+            <td>
+                {{ plan.head_man_user.first_name }}
+                {{ plan.head_man_user.last_name }}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {% trans "members" %}
+            </th>
+            <td>
+                {{ plan.participants_cnt }} {% trans "persons" %}
+                (<a href="{% url 'planning:plan_join_members_and_requests' plan_id=plan.id %}">{% trans "list" %}</a>)
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div class="col-sm-2"></div>
+{% endblock %}

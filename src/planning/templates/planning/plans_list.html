@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+<li class="breadcrumb-item active">{% trans "plans" %}</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
+    {% if auth %}
+        {% if my_plans %}
+            <h4>{% trans "my plans" %}</h4>
+            {% for plan in my_plans%}
+                {% include 'planning/plan_card.html' with plan=plan %}
+            {% endfor %}
+        {% endif %}
+
+        {% if pending_plans %}
+        <h4>{% trans "pending plans" %}</h4>
+            {% for plan in pending_plans%}
+                {% include 'planning/plan_card.html' with plan=plan %}
+            {% endfor %}
+        {% endif %}
+
+        {% if other_plans %}
+            <h4>{% trans "other plans" %}</h4>
+            {% for plan in other_plans%}
+                    {% include 'planning/plan_card.html' with plan=plan %}
+            {% endfor %}
+            {% endif %}
+        {% else %}
+        <h4>{% trans "all plans" %}</h4>
+        {% for plan in plans %}
+        {% include 'planning/plan_card.html' with plan=plan %}
+        {% endfor %}
+    {% endif %}
+</div>
+<div class="col-sm-1"></div>
+{% endblock %}
+

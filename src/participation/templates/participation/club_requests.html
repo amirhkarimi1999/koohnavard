@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+<li class="breadcrumb-item">
+    <a href="{% url 'participation:clubs_list' %}">
+        {% trans "clubs" %}
+    </a>
+</li>
+
+<li class="breadcrumb-item">
+    <a href="{% url 'participation:club_view' club_id=club.id %}">
+        {{ club.title }}
+    </a>
+</li>
+
+<li class="breadcrumb-item active">
+    {% trans "membership" %}
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-1"></div>
+<div class="col-sm-4">
+    <h4>{% trans "members" %}</h4>
+    <table class="table">
+        <tbody>
+            {% for req in members %}
+            <tr>
+                <td>{{ req.user.first_name }}</td>
+                <td>{{ req.user.last_name }}</td>
+                <td>
+                {% if is_owner %}
+                    <a href="{% url 'participation:kick_club_member' req_id=req.id %}" class="text-danger">{% trans "kick" %}</a>
+                {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="col-sm-1"></div>
+{% if is_owner %}
+<div class="col-sm-5">
+    <h4>{% trans "pending requests" %}</h4>
+    <table class="table">
+        <tbody>
+            {% for req in reqs %}
+            <tr>
+                <td>{{ req.user.first_name }}</td>
+                <td>{{ req.user.last_name }}</td>
+                <td>
+                    <a href="{% url 'participation:answer_club_join_request' req_id=req.id accept=1 %}" class="text-success">
+                        {% trans "accept" %}
+                    </a>
+                </td>
+                <td>
+                    <a href="{% url 'participation:answer_club_join_request' req_id=req.id accept=0 %}" class="text-danger">
+                        {% trans "reject" %}
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+<div class="col-sm-1"></div>
+{% endblock %}

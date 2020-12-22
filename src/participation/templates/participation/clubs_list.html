@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+<li class="breadcrumb-item active">{% trans "clubs" %}</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-1"></div>
+<div class="col-sm-10">
+    {% if auth %}
+        {% if my_clubs %}
+            <h4>{% trans "my clubs" %}</h4>
+            {% for club in my_clubs%}
+                {% include 'participation/club_card.html' with club=club %}
+            {% endfor %}
+        {% endif %}
+
+        {% if pending_clubs %}
+            <br />
+            <br />
+            <h4>{% trans "pending clubs" %}</h4>
+            {% for club in pending_clubs%}
+                {% include 'participation/club_card.html' with club=club %}
+            {% endfor %}
+        {% endif %}
+
+        {% if other_clubs %}
+            <br />
+            <br />
+            <h4>{% trans "other clubs" %}</h4>
+            {% for club in other_clubs%}
+                {% include 'participation/club_card.html' with club=club %}
+            {% endfor %}
+        {% endif %}
+    {% else %}
+        <h4></h4>
+        {% for club in clubs %}
+            {% include 'participation/club_card.html' with club=club %}
+        {% endfor %}
+    {% endif %}
+</div>
+<div class="col-sm-1"></div>
+{% endblock %}

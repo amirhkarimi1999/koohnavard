@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+<li class="breadcrumb-item">
+    <a href="{% url 'planning:all_plans_list' %}">
+        {% trans "plans" %}
+    </a>
+</li>
+
+<li class="breadcrumb-item">
+    <a href="{% url 'planning:plan_view' plan_id=plan.id %}">
+        {{ plan.title }}
+    </a>
+</li>
+
+<li class="breadcrumb-item active">
+    {% trans "membership" %}
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-1"></div>
+<div class="col-sm-4">
+    <h4>{% trans "members" %}</h4>
+    <table class="table">
+        <tr>
+            <th>{% trans "first_name" %}</th>
+            <th>{% trans "last_name" %}</th>
+            {% if edit_access %}
+            <th>{% trans "action" %}</th>
+            {% endif %}
+        </tr>
+        <tbody>
+        {% for req in members %}
+        <tr>
+            <td>{{ req.user.first_name }}</td>
+            <td>{{ req.user.last_name }}</td>
+            {% if edit_access %}
+
+            <td>
+                <a href="{% url 'planning:answer_plan_join_request' req_id=req.id accept='REJECT' %}"
+                   class="text-danger">{% trans "kick" %}</a>
+            </td>
+            {% endif %}
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="col-sm-1"></div>
+{%if pending %}
+<div class="col-sm-5">
+    <h4>{% trans "pending requests" %}</h4>
+    <table class="table">
+        <tbody>
+        {% for req in pending %}
+        <tr>
+            <td>{{ req.user.first_name }}</td>
+            <td>{{ req.user.last_name }}</td>
+            {% if edit_access %}
+            <td>
+                <a href="{% url 'planning:answer_plan_join_request' req_id=req.id accept='ACCEPT' %}"
+                   class="text-success">
+                    {% trans "accept" %}
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'planning:answer_plan_join_request' req_id=req.id accept='REJECT' %}"
+                   class="text-danger">
+                    {% trans "reject" %}
+                </a>
+            </td>
+            {% endif %}
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endif %}
+<div class="col-sm-1"></div>
+{% endblock %}

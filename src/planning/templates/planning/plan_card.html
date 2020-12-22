@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<div class="card club-card" style="width: 18rem;">
+    <div class="card-body">
+        <h5 class="card-title"> {{ plan.title }} </h5>
+        <p class="card-text">{{ plan.description }}</p>
+        <a href="{% url 'planning:plan_view' plan_id=plan.id %}" class="card-link">{% trans "details" %}</a>
+    </div>
+</div>
