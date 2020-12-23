@@ -31,6 +31,7 @@
             {% if edit_access %}
             <th>{% trans "action" %}</th>
             {% endif %}
+            <th>{% trans "duty" %}</th>
         </tr>
         <tbody>
         {% for req in members %}
@@ -38,12 +39,29 @@
             <td>{{ req.user.first_name }}</td>
             <td>{{ req.user.last_name }}</td>
             {% if edit_access %}
-
             <td>
                 <a href="{% url 'planning:answer_plan_join_request' req_id=req.id accept='REJECT' %}"
                    class="text-danger">{% trans "kick" %}</a>
             </td>
+            <td>
+                <div class="card-body">
+                    <form method="post"
+                          action="{% url 'planning:addDuty' plan_id=plan.id req_id=req.id %}">
+                        {% csrf_token %}
+                        <input type="text"  class="form-control" name="duty" value="{{ req.duty }}">
+                        <button type="submit" class="btn btn-primary">save</button>
+                    </form>
+                </div>
+
+            </td>
+            {% else %}
+            <td>
+                {{ req.duty }}
+            </td>
+
+
             {% endif %}
+
 
         </tr>
         {% endfor %}

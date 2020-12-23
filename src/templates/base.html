@@ -14,8 +14,15 @@
         {% trans "Profile" %}
     </a>
 </div>
+<hr class="sidebar-hr" />
+<div class="navbar menu-item">
+    <a href="{% url 'accounts:duties' %}" class="btn btn-link text-menuitem">
+        {% trans "Duties" %}
+    </a>
+</div>
 {% endif %}
 
+<hr class="sidebar-hr" />
 <div class="navbar menu-item">
     <div class="dropdown menu-dropdown">
         <button type="button" class="btn btn-link text-menuitem dropdown-toggle" id="clubsDropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

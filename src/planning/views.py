@@ -175,3 +175,10 @@ def answer_request_view(request, req_id, accept):
         req.status = PlanParticipant.MemberStatus.REJECTED
     req.save()
     return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan.id,)))
+
+@login_required
+def addDuty(request, plan_id, req_id):
+    pp = get_object_or_404(PlanParticipant, pk=req_id)
+    pp.duty = request.POST.get('duty')
+    pp.save()
+    return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan_id,)))

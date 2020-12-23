@@ -3,6 +3,7 @@ from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from planning.models import PlanParticipant
 
 from accounts.forms import UserRegisterForm, UserProfileInfoForm
 
@@ -75,5 +76,9 @@ def logout_user(request):
 def profile(request):
     return render(request, 'accounts/profile.html')
 
+@login_required
+def duties(request):
+    planParticipants = PlanParticipant.objects.filter(user=request.user, status=str(PlanParticipant.MemberStatus.ACCEPTED), duty__isnull=False)
+    return render(request, 'accounts/duties.html', {'planParticipants': planParticipants})
 
 

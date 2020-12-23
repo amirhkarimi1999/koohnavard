@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+<li class="breadcrumb-item active">{% trans "Duties" %}</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-4">
+    <h4>{% trans "duties" %}</h4>
+    <table class="table">
+        <tr>
+            <th>{% trans "club" %}</th>
+            <th>{% trans "plan" %}</th>
+            <th>{% trans "duty" %}</th>
+        </tr>
+        <tbody>
+        {% for pp in planParticipants %}
+        <tr>
+            <td>{{ pp.plan.club.title }}</td>
+            <td>{{ pp.plan.title }}</td>
+            <td>{{ pp.duty }}</td>
+
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="col-sm-1"></div>
+{% endblock %}

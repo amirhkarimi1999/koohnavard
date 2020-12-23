@@ -43,3 +43,4 @@ class PlanParticipant(models.Model):
     plan = models.ForeignKey(Plan, null=False, on_delete=models.CASCADE, verbose_name=_('plan'))
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('user'))
     status = models.CharField(max_length=255, choices=MemberStatus.choices, verbose_name=_('status'))
+    duty = models.CharField(max_length=1000, null=True, verbose_name=_('duty'))
