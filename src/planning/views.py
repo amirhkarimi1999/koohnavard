@@ -180,5 +180,6 @@ def answer_request_view(request, req_id, accept):
 def addDuty(request, plan_id, req_id):
     pp = get_object_or_404(PlanParticipant, pk=req_id)
     pp.duty = request.POST.get('duty')
+    pp.isDutySeen = False
     pp.save()
     return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan_id,)))

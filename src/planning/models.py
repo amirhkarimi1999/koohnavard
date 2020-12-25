@@ -44,3 +44,5 @@ class PlanParticipant(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('user'))
     status = models.CharField(max_length=255, choices=MemberStatus.choices, verbose_name=_('status'))
     duty = models.CharField(max_length=1000, null=True, verbose_name=_('duty'))
+    isDutySeen = models.BooleanField(default=False, verbose_name=_('isDutyseen'))
+

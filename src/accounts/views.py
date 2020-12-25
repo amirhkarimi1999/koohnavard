@@ -76,9 +76,14 @@ def logout_user(request):
 def profile(request):
     return render(request, 'accounts/profile.html')
 
+
 @login_required
 def duties(request):
-    planParticipants = PlanParticipant.objects.filter(user=request.user, status=str(PlanParticipant.MemberStatus.ACCEPTED), duty__isnull=False)
+    planParticipants = PlanParticipant.objects.filter(user=request.user,
+                                                      status=str(PlanParticipant.MemberStatus.ACCEPTED),
+                                                      duty__isnull=False)
+    for pp in planParticipants:
+        if not pp.isDutySeen:
+            pp.isDutySeen = True
+            pp.save()
     return render(request, 'accounts/duties.html', {'planParticipants': planParticipants})
-
-
