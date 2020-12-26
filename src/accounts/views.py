@@ -2,7 +2,9 @@ from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
+from django.views import generic
+
 from planning.models import PlanParticipant
 
 from accounts.forms import UserRegisterForm, UserProfileInfoForm
@@ -73,11 +75,6 @@ def logout_user(request):
 
 
 @login_required
-def profile(request):
-    return render(request, 'accounts/profile.html')
-
-
-@login_required
 def duties(request):
     planParticipants = PlanParticipant.objects.filter(user=request.user,
                                                       status=str(PlanParticipant.MemberStatus.ACCEPTED),
@@ -87,3 +84,31 @@ def duties(request):
             pp.isDutySeen = True
             pp.save()
     return render(request, 'accounts/duties.html', {'planParticipants': planParticipants})
+
+
+@login_required
+def profile_view(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('accounts:register'))
+    profile_form = UserProfileInfoForm(data=request.POST or None)
+    if request.method == 'POST':
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            profile.user = request.user
+            if 'profile_pic' in request.FILES:
+                print('found profile pic')
+                profile.profile_pic = request.FILES['profile_pic']
+            profile.save()
+            return HttpResponseRedirect(reverse('participation:clubs_list'))
+        else:
+            print(profile_form.errors)
+    return render(request, 'accounts/profile.html', {'profile_form': profile_form})
+
+
+# class UserEditView(generic.UpdateView):
+#     form_class = UserProfileInfoForm
+#     template_name = 'accounts/profile.html'
+#     success_url = reverse_lazy('participation:clubs_list')
+#
+#     def get_object(self, queryset=None):
+#         return self.request.user

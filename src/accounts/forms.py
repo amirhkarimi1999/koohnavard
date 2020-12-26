@@ -7,7 +7,7 @@ from accounts.models import UserProfile
 class UserRegisterForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['username', 'first_name', 'last_name', 'password', 'password']
+        fields = ['username', 'password', 'password']
         widgets = {
             'password': forms.PasswordInput(),
         }
@@ -22,4 +22,4 @@ class UserLoginForm(forms.ModelForm):
 class UserProfileInfoForm(forms.ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['profile_pic']
+        fields = ['first_name', 'last_name', 'email', 'bio', 'profile_pic']
