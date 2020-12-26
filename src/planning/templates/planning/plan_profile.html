@@ -33,7 +33,15 @@
             {% trans "edit" %}
         </a>
         <hr class="club-ops-hr">
+        <a href="{% url 'planning:addCharge' plan_id=plan.id %}">
+            {% trans "add a new charge report" %}
+        </a>
+        <hr class="club-ops-hr">
     {% endif %}
+    <a href="{% url 'planning:plan_details' plan_id=plan.id %}">
+            {% trans "report" %}
+        </a>
+
 </div>
 <div class="col-sm-7">
     <br/>
@@ -103,6 +111,15 @@
             <td>
                 {{ plan.participants_cnt }} {% trans "persons" %}
                 (<a href="{% url 'planning:plan_join_members_and_requests' plan_id=plan.id %}">{% trans "list" %}</a>)
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {% trans "charges" %}
+            </th>
+            <td>
+                {{ totalCharge }}(toman)
+                (<a href="{% url 'planning:charges' plan_id=plan.id %}">{% trans "details" %}</a>)
             </td>
         </tr>
         </tbody>

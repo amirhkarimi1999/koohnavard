@@ -1,10 +1,64 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+<li class="breadcrumb-item">
+    <a href="{% url 'planning:all_plans_list' %}">
+        {% trans "plans" %}
+    </a>
+</li>
+
+<li class="breadcrumb-item">
+    <a href="{% url 'participation:club_view' club_id=plan.club.id %}">
+        {{ plan.club }}
+    </a>
+</li>
+<li class="breadcrumb-item">
+    <a href="{% url 'planning:plan_view' plan_id=plan.id %}">
+        {{ plan.title }}
+    </a>
+</li>
+
+<li class="breadcrumb-item active">
+    {% trans "Charges" %}
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-1"></div>
+<div class="col-sm-4">
+    <h4>{% trans "members" %}</h4>
+    <table class="table">
+        <tr>
+            <th>{% trans "title" %}</th>
+            <th>{% trans "details" %}</th>
+            <th>{% trans "amount(toman)" %}</th>
+            <th>{% trans "by" %}</th>
+        </tr>
+        <tbody>
+        {% for charge in charges %}
+        <tr>
+            <td>{{ charge.title }}</td>
+            <td>{{ charge.description }}</td>
+            <td>{{ charge.amount }}</td>
+            <td>{{ charge.user }}</td>
+
+        </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td></td>
+            <td>{{ total }}</td>
+            <td>Total Charge</td>
+
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="col-sm-1"></div>
+
+<div class="col-sm-1"></div>
+{% endblock %}

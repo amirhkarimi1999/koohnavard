@@ -7,8 +7,8 @@ from django.urls import reverse
 from django.utils.translation import gettext as _
 
 from participation.models import Club, ClubMember
-from .forms import PlanForm
-from .models import Plan, PlanParticipant
+from .forms import PlanForm, ReportForm, ChargeForm
+from .models import Plan, PlanParticipant, Charge
 
 
 def plans_list_view(request, club_id=0):
@@ -33,6 +33,7 @@ def plans_list_view(request, club_id=0):
         my_plans.sort(key=lambda plan: plan.start_datetime)
         my_plans.reverse()
 
+
     return render(request, 'planning/plans_list.html', {
         'plans': plans,
         'my_plans': my_plans,
@@ -42,12 +43,17 @@ def plans_list_view(request, club_id=0):
 def plan_profile_view(request, plan_id):
     plan = get_object_or_404(Plan, pk=plan_id)
     plan_participant = None
+    charges = Charge.objects.filter(plan= plan_id)
+    totalCharge = 0
+    for c in charges:
+        totalCharge += c.amount
     if request.user.is_authenticated and PlanParticipant.objects.filter(user=request.user, plan=plan).count():
         plan_participant = PlanParticipant.objects.get(user=request.user, plan=plan)
     return render(request,
                   'planning/plan_profile.html',
                   {'plan': plan,
-                   'plan_participant': plan_participant})
+                   'plan_participant': plan_participant,
+                   'totalCharge': totalCharge})
 
 
 @login_required
@@ -87,6 +93,38 @@ def edit_plan_view(request, plan_id):
                   'planning/plan_edit.html',
                   {'form': form, 'plan': plan})
 
+
+@login_required
+def addCharge(request, plan_id):
+    plan = get_object_or_404(Plan, pk=plan_id)
+    if PlanParticipant.objects.filter(plan=plan, user=request.user).count():
+        if request.method == 'POST':
+            form = ChargeForm(data=request.POST)
+            if form.is_valid():
+                charge = form.save(commit=False)
+                charge.plan = plan
+                charge.user = request.user
+                charge.save()
+                return HttpResponseRedirect(reverse('planning:plan_view',
+                                                    args=[plan.id]))
+        else:
+            charge_form = ChargeForm()
+
+    return render(request, 'planning/add_charge.html', {'plan': plan, 'charge_form': charge_form})
+
+@login_required
+def detail_plan_view(request, plan_id):
+    plan = get_object_or_404(Plan, pk=plan_id)
+    edit_access = False
+    if plan.head_man_user == request.user or plan.club.owner == request.user:
+        edit_access = True
+    if request.method == 'POST':
+        plan.report = request.POST['report']
+        plan.save()
+    form = ReportForm(initial={'report': plan.report})
+    return render(request,
+                  'planning/plan_details.html',
+                  {'form': form, 'plan': plan, 'edit_access': edit_access})
 
 @login_required
 def create_plan_view(request, club_id):
@@ -185,8 +223,21 @@ def addDuty(request, plan_id, req_id):
     return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan_id,)))
 
 @login_required
+def Charges(request, plan_id):
+    charges = Charge.objects.filter(plan=plan_id)
+    plan = get_object_or_404(Plan, pk=plan_id)
+    totalPlanCarges = 0
+    for p in charges:
+        totalPlanCarges += p.amount
+
+    return render(request, 'planning/plan_charges.html', {'charges': charges, 'plan': plan, 'total': totalPlanCarges})
+
+
+@login_required
 def addRole(request, plan_id, req_id):
     pp = get_object_or_404(PlanParticipant, pk=req_id)
     pp.role = request.POST.get('role')
     pp.save()
     return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan_id,)))
+
+

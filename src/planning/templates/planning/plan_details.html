@@ -1,10 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
 
-</body>
-</html>
+{% block title %}
+<li class="breadcrumb-item">
+    <a href="{% url 'planning:all_plans_list' %}">
+        {% trans "plans" %}
+    </a>
+</li>
+
+<li class="breadcrumb-item">
+    <a href="{% url 'planning:plan_view' plan_id=plan.id %}">
+        {{ plan.title }}
+    </a>
+</li>
+
+<li class="breadcrumb-item active">
+    {% trans "plan details" %}
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+    <div class="card card-form">
+        <div class="card-header">
+            {% trans "Plan Report" %}
+        </div>
+        <div class="card-body">
+            {% if edit_access }
+            <form method="post" action="{% url 'planning:plan_details' plan_id=plan.id %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <input name="" type="submit" class="btn btn-primary" value="{% trans 'edit' %}"/>
+            </form>
+            {% endif %}
+            {{ form.media }}
+        </div>
+    </div>
+</div>
+<div class="col-sm-3"></div>
+{% endblock %}

@@ -13,7 +13,7 @@
         {% if my_plans %}
             <h4>{% trans "my plans" %}</h4>
             {% for plan in my_plans%}
-                {% include 'planning/plan_card.html' with plan=plan %}
+                {% include 'planning/plan_card.html' with plan=plan.plan %}
             {% endfor %}
         {% endif %}
 
