@@ -1,6 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.http.response import HttpResponseRedirect, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -8,6 +8,7 @@ from django.views import generic
 from planning.models import PlanParticipant
 
 from accounts.forms import UserRegisterForm, UserProfileInfoForm
+from accounts.models import UserProfile
 
 
 def index(request):
@@ -94,16 +95,32 @@ def profile_view(request):
     if request.method == 'POST':
         if profile_form.is_valid():
             profile = profile_form.save(commit=False)
-            profile.user = request.user
+            user = get_object_or_404(UserProfile, user=request.user)
             if 'profile_pic' in request.FILES:
                 print('found profile pic')
-                profile.profile_pic = request.FILES['profile_pic']
-            profile.save()
-            return HttpResponseRedirect(reverse('participation:clubs_list'))
+                user.profile_pic = request.FILES['profile_pic']
+            if profile.first_name :
+                user.first_name = profile.first_name
+            if profile.last_name :
+                user.last_name = profile.last_name
+            if profile.email :
+                user.email = profile.email
+            if profile.bio:
+                user.bio = profile.bio
+            user.save()
+            return HttpResponseRedirect(reverse('accounts:seeProfile'))
         else:
             print(profile_form.errors)
     return render(request, 'accounts/profile.html', {'profile_form': profile_form})
 
+@login_required
+def see_profile(request):
+    if not request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('accounts:register'))
+    else:
+        user = get_object_or_404(UserProfile, user=request.user)
+        print(user.email)
+        return render(request, 'accounts/see_profile.html', {'userProfile': user})
 
 # class UserEditView(generic.UpdateView):
 #     form_class = UserProfileInfoForm

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+<li class="breadcrumb-item">
+    <a href="{% url 'accounts:seeProfile' %}">
+        {% trans "Profile" %}
+    </a>
+</li>
+
+<li class="breadcrumb-item active">
+    {{ userProfile.user }}
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-3" style="text-align: center;">
+    <br/>
+    <a href="{% url 'accounts:profile'%}" class="text-danger">
+        {% trans "edit" %}
+    </a>
+    <br>
+    <a href="{% url 'password_change'%}" class="text-danger">
+        {% trans "change password" %}
+    </a>
+
+
+</div>
+<div class="col-sm-7">
+    <br/>
+    <table class="table">
+        <tbody>
+        <tr>
+            <th scope="row">
+                {% trans "fisrt name" %}
+            </th>
+            <td>
+                {{ userProfile.first_name }}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {% trans "last name" %}
+            </th>
+            <td>
+                {{ userProfile.last_name }}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {% trans "email" %}
+            </th>
+            <td>
+                {{ userProfile.email }}
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">
+                {% trans "bio" %}
+            </th>
+            <td>
+                {{ userProfile.bio }}
+            </td>
+        </tr>
+        {% if userProfile.profile_pic %}
+        <tr>
+            <th scope="row">
+                {% trans "profile picture" %}
+            </th>
+
+            <td>
+                <img src="{{ userProfile.profile_pic.url }}">
+            </td>
+
+
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+<div class="col-sm-2"></div>
+{% endblock %}
