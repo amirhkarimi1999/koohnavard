@@ -45,4 +45,5 @@ class PlanParticipant(models.Model):
     status = models.CharField(max_length=255, choices=MemberStatus.choices, verbose_name=_('status'))
     duty = models.CharField(max_length=1000, null=True, verbose_name=_('duty'))
     isDutySeen = models.BooleanField(default=False, verbose_name=_('isDutyseen'))
+    role = models.CharField(max_length=40, null=True, verbose_name=_('role'))
 

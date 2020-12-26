@@ -32,6 +32,7 @@
             <th>{% trans "action" %}</th>
             {% endif %}
             <th>{% trans "duty" %}</th>
+            <th>{% trans "role" %}</th>
         </tr>
         <tbody>
         {% for req in members %}
@@ -45,10 +46,19 @@
             </td>
             <td>
                 <div class="card-body">
-                    <form method="post"
-                          action="{% url 'planning:addDuty' plan_id=plan.id req_id=req.id %}">
+                    <form method="post" action="{% url 'planning:addDuty' plan_id=plan.id req_id=req.id %}">
                         {% csrf_token %}
                         <input type="text"  class="form-control" name="duty" value="{{ req.duty }}">
+                        <button type="submit" class="btn btn-primary">save</button>
+                    </form>
+                </div>
+            </td>
+
+            <td>
+                <div class="card-body">
+                    <form method="post" action="{% url 'planning:addRuty' plan_id=plan.id req_id=req.id %}">
+                        {% csrf_token %}
+                        <input type="text"  class="form-control" name="role" value="{{ req.role }}">
                         <button type="submit" class="btn btn-primary">save</button>
                     </form>
                 </div>
@@ -57,11 +67,9 @@
             {% else %}
             <td>
                 {{ req.duty }}
+                {{ req.role }}
             </td>
-
-
             {% endif %}
-
 
         </tr>
         {% endfor %}

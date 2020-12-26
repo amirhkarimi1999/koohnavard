@@ -183,3 +183,10 @@ def addDuty(request, plan_id, req_id):
     pp.isDutySeen = False
     pp.save()
     return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan_id,)))
+
+@login_required
+def addRole(request, plan_id, req_id):
+    pp = get_object_or_404(PlanParticipant, pk=req_id)
+    pp.role = request.POST.get('role')
+    pp.save()
+    return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan_id,)))
