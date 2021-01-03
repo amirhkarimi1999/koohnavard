@@ -26,6 +26,11 @@
             <a href="{% url 'planning:answer_plan_join_request' req_id=plan_participant.id accept='REJECT' %}" class="text-danger">
                 {% trans "cancel request" %}
             </a>
+        {% elif plan_participant.status == "ACCEPTED" %}
+            <a href="{% url 'planning:addCharge' plan_id=plan.id %}">
+                {% trans "add a new charge report" %}
+            </a>
+            <hr class="club-ops-hr">
         {% endif %}
 
     {% else %}
@@ -33,14 +38,12 @@
             {% trans "edit" %}
         </a>
         <hr class="club-ops-hr">
-        <a href="{% url 'planning:addCharge' plan_id=plan.id %}">
-            {% trans "add a new charge report" %}
-        </a>
-        <hr class="club-ops-hr">
-    {% endif %}
-    <a href="{% url 'planning:plan_details' plan_id=plan.id %}">
+        <a href="{% url 'planning:plan_details' plan_id=plan.id %}">
             {% trans "report" %}
         </a>
+
+    {% endif %}
+
 
 </div>
 <div class="col-sm-7">
