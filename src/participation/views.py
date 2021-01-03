@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpResponseBadRequest
 
+from accounts.models import UserProfile
 from planning.models import PlanParticipant
 from .models import Club, ClubMember
 from .forms import ClubForm
@@ -47,11 +48,13 @@ def clubs_list_view(request):
 def club_profile_view(request, club_id):
     club = get_object_or_404(Club, pk=club_id)
     members = club.clubmember_set.filter(pending=False)
+    owner = get_object_or_404(UserProfile, user=club.owner)
     req = ClubMember.objects.filter(user=request.user, club=club).first()
     return render(request,
             'participation/club_profile.html',
             {
                 'club': club,
+                'owner': owner,
                 'members': members,
                 'is_mine': club.owner == request.user,
                 'is_member': req is not None and not req.pending,
@@ -83,7 +86,15 @@ def club_requests_view(request, club_id):
     club = get_object_or_404(Club, pk=club_id)
     is_owner = club.owner == request.user
     reqs = ClubMember.objects.filter(club=club, pending=True)
+    temp = []
+    for m in reqs:
+        temp.append(get_object_or_404(UserProfile, user=m.user))
+    reqs = temp
     members = ClubMember.objects.filter(club=club, pending=False)
+    temp = []
+    for m in members:
+        temp.append(get_object_or_404(UserProfile, user=m.user))
+    members = temp
     return render(request,
             'participation/club_requests.html',
             {

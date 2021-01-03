@@ -28,8 +28,8 @@
         <tbody>
             {% for req in members %}
             <tr>
-                <td>{{ req.user.first_name }}</td>
-                <td>{{ req.user.last_name }}</td>
+                <td>{{ req.first_name }}</td>
+                <td>{{ req.last_name }}</td>
                 <td>
                 {% if is_owner %}
                     <a href="{% url 'participation:kick_club_member' req_id=req.id %}" class="text-danger">{% trans "kick" %}</a>
@@ -48,8 +48,8 @@
         <tbody>
             {% for req in reqs %}
             <tr>
-                <td>{{ req.user.first_name }}</td>
-                <td>{{ req.user.last_name }}</td>
+                <td>{{ req.first_name }}</td>
+                <td>{{ req.last_name }}</td>
                 <td>
                     <a href="{% url 'participation:answer_club_join_request' req_id=req.id accept=1 %}" class="text-success">
                         {% trans "accept" %}

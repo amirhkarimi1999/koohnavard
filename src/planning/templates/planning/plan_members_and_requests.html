@@ -37,8 +37,8 @@
         <tbody>
         {% for req in members %}
         <tr>
-            <td>{{ req.user.first_name }}</td>
-            <td>{{ req.user.last_name }}</td>
+            <td>{{ req.first_name }}</td>
+            <td>{{ req.last_name }}</td>
             {% if edit_access %}
             <td>
                 <a href="{% url 'planning:answer_plan_join_request' req_id=req.id accept='REJECT' %}"
@@ -86,8 +86,8 @@
         <tbody>
         {% for req in pending %}
         <tr>
-            <td>{{ req.user.first_name }}</td>
-            <td>{{ req.user.last_name }}</td>
+            <td>{{ req.first_name }}</td>
+            <td>{{ req.last_name }}</td>
             {% if edit_access %}
             <td>
                 <a href="{% url 'planning:answer_plan_join_request' req_id=req.id accept='ACCEPT' %}"

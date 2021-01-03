@@ -6,6 +6,7 @@ from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.utils.translation import gettext as _
 
+from accounts.models import UserProfile
 from participation.models import Club, ClubMember
 from .forms import PlanForm, ReportForm, ChargeForm
 from .models import Plan, PlanParticipant, Charge
@@ -43,6 +44,8 @@ def plans_list_view(request, club_id=0):
 def plan_profile_view(request, plan_id):
     plan = get_object_or_404(Plan, pk=plan_id)
     plan_participant = None
+    user = get_object_or_404(User, username=plan.head_man)
+    headman = get_object_or_404(UserProfile, user=user)
     charges = Charge.objects.filter(plan= plan_id)
     totalCharge = 0
     for c in charges:
@@ -52,6 +55,7 @@ def plan_profile_view(request, plan_id):
     return render(request,
                   'planning/plan_profile.html',
                   {'plan': plan,
+                   'headman': headman,
                    'plan_participant': plan_participant,
                    'totalCharge': totalCharge})
 
@@ -121,7 +125,7 @@ def detail_plan_view(request, plan_id):
     if request.method == 'POST':
         plan.report = request.POST['report']
         plan.save()
-    form = ReportForm(initial={'report': plan.report})
+    form = ReportForm()
     return render(request,
                   'planning/plan_details.html',
                   {'form': form, 'plan': plan, 'edit_access': edit_access})
@@ -185,7 +189,9 @@ def plan_members_and_requests_view(request, plan_id):
     ## TODO for requests
     plan = get_object_or_404(Plan, pk=plan_id)
     members = PlanParticipant.objects.filter(plan=plan, status=str(PlanParticipant.MemberStatus.ACCEPTED))
+
     pending = PlanParticipant.objects.filter(plan=plan, status=str(PlanParticipant.MemberStatus.PENDING))
+
     if not ClubMember.objects.filter(club=plan.club, user=request.user).count():
         return HttpResponseForbidden()
     edit_access = False
