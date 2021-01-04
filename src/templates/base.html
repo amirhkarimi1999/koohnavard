@@ -1,0 +1,69 @@
+{% extends 'base-menuless.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block menu %}
+
+<img src="{% static 'pics/logo.png' %}" class="logo"></img>
+
+{% if user.is_authenticated %}
+<hr class="sidebar-hr" />
+<div class="navbar menu-item">
+    <a href="{% url 'accounts:seeProfile' %}" class="btn btn-link text-menuitem">
+        {% trans "Profile" %}
+    </a>
+</div>
+<hr class="sidebar-hr" />
+<div class="navbar menu-item">
+    <a href="{% url 'accounts:duties' %}" class="btn btn-link text-menuitem">
+        {% trans "Duties" %}
+    </a>
+</div>
+{% endif %}
+
+<hr class="sidebar-hr" />
+<div class="navbar menu-item">
+    <div class="dropdown menu-dropdown">
+        <button type="button" class="btn btn-link text-menuitem dropdown-toggle" id="clubsDropdownButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {% trans "clubs" %}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="clubsDropdownButton">
+            <a class="dropdown-item" href="{% url 'participation:clubs_list' %}">
+                {% trans "list" %}
+            </a>
+            <a class="dropdown-item" href="{% url 'participation:club_create' %}">
+                {% trans "new" %}
+            </a>
+        </div>
+    </div>
+</div>
+<hr class="sidebar-hr" />
+<div class="navbar menu-item">
+    <a href="{% url 'planning:all_plans_list' %}" class="btn btn-link text-menuitem">
+        {% trans "plans" %}
+    </a>
+</div>
+{% if user.is_authenticated %}
+<hr class="sidebar-hr" />
+<div class="navbar menu-item">
+    <a href="{% url 'accounts:logout' %}" class="btn btn-link text-menuitem">
+        {% trans "logout" %} ({{ user.username }})
+    </a>
+</div>
+{% else %}
+<hr class="sidebar-hr" />
+<div class="navbar menu-item">
+    <a href="{% url 'accounts:login' %}" class="btn btn-link text-menuitem">
+        {% trans "login" %}
+    </a>
+</div>
+<hr class="sidebar-hr" />
+<div class="navbar menu-item">
+    <a href="{% url 'accounts:register' %}" class="btn btn-link text-menuitem">
+        {% trans "register" %}
+    </a>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,314 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-17 01:46+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: accounts/models.py:9
+msgid "profile_pic"
+msgstr "عکس پروفایل"
+
+#: accounts/templates/accounts/login.html:7
+#: accounts/templates/accounts/login.html:35 templates/base.html:42
+msgid "login"
+msgstr "ورود"
+
+#: accounts/templates/accounts/login.html:16
+#: accounts/templates/accounts/registration.html:16
+msgid "credentials"
+msgstr "مشخصات کاربری"
+
+#: accounts/templates/accounts/login.html:23
+#: accounts/templates/accounts/login.html:25
+msgid "username"
+msgstr "نام کاربری"
+
+#: accounts/templates/accounts/login.html:30
+#: accounts/templates/accounts/login.html:32
+msgid "password"
+msgstr "رمز عبور"
+
+#: accounts/templates/accounts/registration.html:7
+#: accounts/templates/accounts/registration.html:23 templates/base.html:48
+msgid "register"
+msgstr "ثبت نام"
+
+#: home/templates/home/home.html:209 home/templates/home/home.html:529
+msgid "Plans"
+msgstr "برنامه‌ها"
+
+#: home/templates/home/home.html:217
+msgid "All Plans"
+msgstr "همه برنامه ها"
+
+#: home/templates/home/home.html:521
+msgid "Happy"
+msgstr "خوشحال"
+
+#: home/templates/home/home.html:521
+msgid "Users"
+msgstr "کاربران"
+
+#: home/templates/home/home.html:525
+msgid "Cool"
+msgstr "خفن"
+
+#: home/templates/home/home.html:525
+msgid "Club"
+msgstr "باشگاه"
+
+#: home/templates/home/home.html:529
+msgid "Good"
+msgstr "خوب"
+
+#: koohnavard/settings.py:136
+msgid "English"
+msgstr "انگلیسی"
+
+#: koohnavard/settings.py:137
+msgid "Persian"
+msgstr "فارسی"
+
+#: participation/models.py:12 planning/models.py:12
+#: planning/templates/planning/plan_profile.html:44
+msgid "title"
+msgstr "عنوان"
+
+#: participation/models.py:14
+#: participation/templates/participation/club_profile.html:50
+msgid "owner"
+msgstr "مدیر"
+
+#: participation/models.py:32 planning/models.py:11
+#: planning/templates/planning/plan_profile.html:84
+msgid "club"
+msgstr "باشگاه"
+
+#: participation/models.py:34 planning/models.py:44
+msgid "user"
+msgstr "کاربر"
+
+#: participation/models.py:36
+msgid "pending"
+msgstr "در حال انتظار"
+
+#: participation/templates/participation/club_card.html:7
+#: planning/templates/planning/plan_card.html:7
+msgid "details"
+msgstr "جزییات"
+
+#: participation/templates/participation/club_create.html:8
+#: participation/templates/participation/club_edit.html:8
+#: participation/templates/participation/club_profile.html:8
+#: participation/templates/participation/club_requests.html:8
+#: participation/templates/participation/clubs_list.html:6
+#: templates/base.html:13
+msgid "clubs"
+msgstr "باشگاه‌ها"
+
+#: participation/templates/participation/club_create.html:13
+msgid "add club"
+msgstr "باشگاه جدید"
+
+#: participation/templates/participation/club_create.html:22
+msgid "club properties"
+msgstr "مشخصات باشگاه"
+
+#: participation/templates/participation/club_create.html:28
+#: planning/templates/planning/plan_create.html:28
+msgid "add"
+msgstr "ایجاد"
+
+#: participation/templates/participation/club_edit.html:19
+msgid "edit club"
+msgstr "ویرایش باشگاه"
+
+#: participation/templates/participation/club_edit.html:28
+msgid "properties"
+msgstr "مشخصات باشگاه"
+
+#: participation/templates/participation/club_edit.html:34
+#: participation/templates/participation/club_profile.html:36
+#: planning/templates/planning/plan_edit.html:34
+#: planning/templates/planning/plan_profile.html:33
+msgid "edit"
+msgstr "ویرایش"
+
+#: participation/templates/participation/club_profile.html:23
+msgid "leave"
+msgstr "خروج"
+
+#: participation/templates/participation/club_profile.html:27
+#: planning/templates/planning/plan_profile.html:27
+msgid "cancel request"
+msgstr "لغو درخواست"
+
+#: participation/templates/participation/club_profile.html:31
+#: planning/templates/planning/plan_profile.html:23
+msgid "join request"
+msgstr "درخواست ثبت نام"
+
+#: participation/templates/participation/club_profile.html:40
+msgid "new plan"
+msgstr "ایجاد برنامه"
+
+#: participation/templates/participation/club_profile.html:59
+#: participation/templates/participation/club_requests.html:26
+#: planning/templates/planning/plan_members_and_requests.html:26
+#: planning/templates/planning/plan_profile.html:101
+msgid "members"
+msgstr "اعضا"
+
+#: participation/templates/participation/club_profile.html:62
+#: planning/templates/planning/plan_profile.html:104
+msgid "persons"
+msgstr "نفر"
+
+#: participation/templates/participation/club_profile.html:63
+#: participation/templates/participation/club_profile.html:72
+#: planning/templates/planning/plan_profile.html:105 templates/base.html:17
+msgid "list"
+msgstr "لیست"
+
+#: participation/templates/participation/club_profile.html:68
+#: planning/templates/planning/plan_create.html:8
+#: planning/templates/planning/plan_edit.html:8
+#: planning/templates/planning/plan_members_and_requests.html:8
+#: planning/templates/planning/plan_profile.html:8
+#: planning/templates/planning/plans_list.html:6 templates/base.html:28
+msgid "plans"
+msgstr "برنامه‌ها"
+
+#: participation/templates/participation/club_requests.html:19
+#: planning/templates/planning/plan_members_and_requests.html:19
+msgid "membership"
+msgstr "اعضا"
+
+#: participation/templates/participation/club_requests.html:35
+#: planning/templates/planning/plan_members_and_requests.html:44
+msgid "kick"
+msgstr "حذف"
+
+#: participation/templates/participation/club_requests.html:45
+#: planning/templates/planning/plan_members_and_requests.html:56
+msgid "pending requests"
+msgstr "درخواست‌های عضویت"
+
+#: participation/templates/participation/club_requests.html:54
+#: planning/templates/planning/plan_members_and_requests.html:67
+msgid "accept"
+msgstr "قبول"
+
+#: participation/templates/participation/club_requests.html:59
+#: planning/templates/planning/plan_members_and_requests.html:73
+msgid "reject"
+msgstr "رد"
+
+#: participation/templates/participation/clubs_list.html:14
+msgid "my clubs"
+msgstr "باشگاه‌های من"
+
+#: participation/templates/participation/clubs_list.html:23
+msgid "pending clubs"
+msgstr "باشگاه‌های مورد درخواست"
+
+#: participation/templates/participation/clubs_list.html:32
+msgid "other clubs"
+msgstr "سایر باشگاه‌ها"
+
+#: planning/models.py:13 planning/templates/planning/plan_profile.html:52
+msgid "description"
+msgstr "توضیحات"
+
+#: planning/models.py:15 planning/templates/planning/plan_profile.html:60
+msgid "destination_address"
+msgstr "ادرس مقصد"
+
+#: planning/models.py:16 planning/templates/planning/plan_profile.html:76
+msgid "start_datetime"
+msgstr "زمان و تاریخ شروع"
+
+#: planning/models.py:17 planning/templates/planning/plan_profile.html:92
+msgid "head_man"
+msgstr "سرپرست"
+
+#: planning/models.py:18 planning/templates/planning/plan_profile.html:68
+msgid "group_link"
+msgstr "لینک گروه"
+
+#: planning/models.py:43
+msgid "plan"
+msgstr "برنامه"
+
+#: planning/models.py:45
+msgid "status"
+msgstr "وضعیت"
+
+#: planning/templates/planning/plan_create.html:13
+msgid "add plan"
+msgstr "برنامه‌ی جدید"
+
+#: planning/templates/planning/plan_create.html:22
+msgid "plan properties"
+msgstr "مشخصات برنامه"
+
+#: planning/templates/planning/plan_edit.html:19
+msgid "edit plan"
+msgstr "ویرایش برنامه"
+
+#: planning/templates/planning/plan_edit.html:28
+msgid "Plan Properties"
+msgstr "مشخصات برنامه"
+
+#: planning/templates/planning/plan_members_and_requests.html:29
+msgid "first_name"
+msgstr "نام"
+
+#: planning/templates/planning/plan_members_and_requests.html:30
+msgid "last_name"
+msgstr "نام خانوادگی"
+
+#: planning/templates/planning/plan_members_and_requests.html:32
+msgid "action"
+msgstr "عملیات"
+
+#: planning/templates/planning/plans_list.html:14
+msgid "my plans"
+msgstr "برنامه‌های من"
+
+#: planning/templates/planning/plans_list.html:21
+msgid "pending plans"
+msgstr "برنامه‌های مورد انتظار"
+
+#: planning/templates/planning/plans_list.html:28
+msgid "other plans"
+msgstr "سایر برنامه‌ها"
+
+#: planning/templates/planning/plans_list.html:34
+msgid "all plans"
+msgstr "همه‌ی برنامه‌ها"
+
+#: templates/base.html:20
+msgid "new"
+msgstr "جدید"
+
+#: templates/base.html:35
+msgid "logout"
+msgstr "خروج"
+
+#~ msgid "clubs list"
+#~ msgstr "لیست باشگاه‌ها"
