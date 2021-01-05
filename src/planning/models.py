@@ -53,7 +53,6 @@ class PlanParticipant(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('user'))
     status = models.CharField(max_length=255, choices=MemberStatus.choices, verbose_name=_('status'))
     duty = models.CharField(max_length=1000, null=True, verbose_name=_('duty'))
-    isDutySeen = models.BooleanField(default=False, verbose_name=_('isDutyseen'))
     role = models.CharField(max_length=40, null=True, verbose_name=_('role'))
 
     @property
@@ -67,3 +66,11 @@ class PlanParticipant(models.Model):
         for p in charges:
             totalPlanCarges += p.amount
         return totalPlanCarges
+
+class PlanNotification(models.Model):
+    plan = models.ForeignKey(Plan, null=False, on_delete=models.CASCADE, verbose_name=_('plan'))
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('user'))
+    title = models.CharField(max_length=50, null=False, default="", verbose_name=_('title'))
+    description = models.CharField(max_length=256, null=False, default="", verbose_name=_('description'))
+    time = models.DateTimeField(verbose_name=_('time'))
+    isSeen = models.IntegerField(default=2, verbose_name=_('isSeen'))

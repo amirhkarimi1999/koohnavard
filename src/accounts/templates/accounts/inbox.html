@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+<li class="breadcrumb-item active">
+    {% trans "Inbox" %}
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-1"></div>
+<div class="col-sm-4">
+    <h4>{% trans "notifications" %}</h4>
+    <table class="table">
+        <tr>
+            <th>{% trans "title" %}</th>
+            <th>{% trans "date" %}</th>
+            <th>{% trans "plan" %}</th>
+            <th>{% trans "description" %}</th>
+        </tr>
+        <tbody>
+        {% for notif in notifications %}
+        <tr>
+            {% if notif.isSeen == 0 %}
+            <td>{{ notif.title }}</td>
+            {% else %}
+            <td><strong>{{ notif.title }}</strong></td>
+            {% endif %}
+            <td>{{ notif.time }}</td>
+            <td>
+                <a href="{% url 'planning:plan_view' plan_id=notif.plan.id %}"
+                   class="text-danger">{{ notif.plan }}</a>
+            </td>
+            <td>
+                {{ notif.description }}
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="col-sm-1"></div>
+{% endblock %}

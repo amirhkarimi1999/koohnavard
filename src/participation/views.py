@@ -17,14 +17,6 @@ def clubs_list_view(request):
         pending_reqs = ClubMember.objects.filter(user=request.user, pending=True)
         pending_clubs = list(map(lambda req: req.club, pending_reqs))
 
-        notSeenTasks = PlanParticipant.objects.filter(user=request.user,
-                                                          isDutySeen=False,
-                                                          status=str(PlanParticipant.MemberStatus.ACCEPTED),
-                                                          duty__isnull=False)
-        if len(notSeenTasks) > 0:
-            notifyDuty = True
-        else:
-            notifyDuty = False
 
         other_clubs = list(filter(lambda club: club not in my_clubs and club not in pending_clubs, Club.objects.all()))
         return render(request,
@@ -34,7 +26,6 @@ def clubs_list_view(request):
                     'my_clubs': my_clubs,
                     'pending_clubs': pending_clubs,
                     'other_clubs': other_clubs,
-                    'notify': notifyDuty,
                 })
     else:
         return render(request,

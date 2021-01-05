@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import reverse, reverse_lazy
 from django.views import generic
 
-from planning.models import PlanParticipant
+from planning.models import PlanParticipant, PlanNotification
 
 from accounts.forms import UserRegisterForm, UserProfileInfoForm
 from accounts.models import UserProfile
@@ -80,10 +80,6 @@ def duties(request):
     planParticipants = PlanParticipant.objects.filter(user=request.user,
                                                       status=str(PlanParticipant.MemberStatus.ACCEPTED),
                                                       duty__isnull=False)
-    for pp in planParticipants:
-        if not pp.isDutySeen:
-            pp.isDutySeen = True
-            pp.save()
     return render(request, 'accounts/duties.html', {'planParticipants': planParticipants})
 
 
@@ -119,7 +115,6 @@ def see_profile(request):
         return HttpResponseRedirect(reverse('accounts:register'))
     else:
         user = get_object_or_404(UserProfile, user=request.user)
-        print(user.email)
         return render(request, 'accounts/see_profile.html', {'userProfile': user})
 
 # class UserEditView(generic.UpdateView):
@@ -129,3 +124,11 @@ def see_profile(request):
 #
 #     def get_object(self, queryset=None):
 #         return self.request.user
+
+@login_required
+def seeInbox(request):
+    notifications = PlanNotification.objects.filter(user=request.user).order_by('-time')
+    for notif in notifications:
+        notif.isSeen = max(0, notif.isSeen - 1)
+        notif.save()
+    return render(request, 'accounts/inbox.html', {'notifications': notifications})

@@ -26,6 +26,7 @@ urlpatterns = [
     path('test', lambda req: render(req, 'base.html', {}), name='test'),
 
 
+
     # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
     path('password_change/done/',
          auth_views.PasswordChangeDoneView.as_view(template_name='accounts/registration/password_change_done.html'),

@@ -34,3 +34,5 @@ class ClubMember(models.Model):
                              on_delete=models.CASCADE, verbose_name=_('user'))
 
     pending = models.BooleanField(default=True, verbose_name=_('pending'))
+
+

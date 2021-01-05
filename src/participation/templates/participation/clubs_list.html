@@ -9,12 +9,6 @@
 {% block content %}
 <div class="col-sm-1"></div>
 <div class="col-sm-10">
-    <div style="color:red;">
-        {% if auth and notify %}
-        <h3>you are assigned to a new duty</h3>
-    {% endif %}
-    </div>
-    <br>
     {% if auth %}
         {% if my_clubs %}
             <h4>{% trans "my clubs" %}</h4>

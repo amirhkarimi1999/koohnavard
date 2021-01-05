@@ -4,12 +4,13 @@ from django.http import HttpResponseRedirect
 from django.http.response import HttpResponseForbidden, HttpResponseBadRequest
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.utils import timezone
 from django.utils.translation import gettext as _
 
 from accounts.models import UserProfile
 from participation.models import Club, ClubMember
 from .forms import PlanForm, ReportForm, ChargeForm
-from .models import Plan, PlanParticipant, Charge
+from .models import Plan, PlanParticipant, Charge, PlanNotification
 
 
 def plans_list_view(request, club_id=0):
@@ -197,7 +198,7 @@ def plan_members_and_requests_view(request, plan_id):
     totalPlanCarges = 0
     for p in charges:
         totalPlanCarges += p.amount
-    totalPlanCarges /= charges.count()
+    totalPlanCarges /= members.count()
 
     if not ClubMember.objects.filter(club=plan.club, user=request.user).count():
         return HttpResponseForbidden()
@@ -232,8 +233,12 @@ def answer_request_view(request, req_id, accept):
 def addDuty(request, plan_id, req_id):
     pp = get_object_or_404(PlanParticipant, pk=req_id)
     pp.duty = request.POST.get('duty')
-    pp.isDutySeen = False
     pp.save()
+    PlanNotification(user=request.user,
+                                    plan=get_object_or_404(Plan, id=plan_id),
+                                    title='new Duty',
+                                    description=pp.duty,
+                                    time=timezone.now()).save()
     return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan_id,)))
 
 @login_required
@@ -252,6 +257,10 @@ def addRole(request, plan_id, req_id):
     pp = get_object_or_404(PlanParticipant, pk=req_id)
     pp.role = request.POST.get('role')
     pp.save()
+    PlanNotification(user=request.user,
+                                    plan=get_object_or_404(Plan, id=plan_id),
+                                    title='new role assigned',
+                                    description=pp.role,
+                                    time=timezone.now()).save()
     return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan_id,)))
-
 

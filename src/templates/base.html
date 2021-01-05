@@ -17,6 +17,12 @@
 </div>
 <hr class="sidebar-hr" />
 <div class="navbar menu-item">
+    <a href="{% url 'accounts:inbox' %}" class="btn btn-link text-menuitem">
+        {% trans "Inbox" %}
+    </a>
+</div>
+<hr class="sidebar-hr" />
+<div class="navbar menu-item">
     <a href="{% url 'accounts:duties' %}" class="btn btn-link text-menuitem">
         {% trans "Duties" %}
     </a>
