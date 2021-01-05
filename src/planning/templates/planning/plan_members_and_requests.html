@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% load i18n %}
+{% load mathfilters %}
 
 {% block title %}
 <li class="breadcrumb-item">
@@ -33,12 +34,14 @@
             {% endif %}
             <th>{% trans "duty" %}</th>
             <th>{% trans "role" %}</th>
+            <th>{% trans "total payed" %}</th>
+            <th>{% trans "should pay" %}</th>
         </tr>
         <tbody>
         {% for req in members %}
         <tr>
-            <td>{{ req.first_name }}</td>
-            <td>{{ req.last_name }}</td>
+            <td>{{ req.getUser.first_name }}</td>
+            <td>{{ req.getUser.last_name }}</td>
             {% if edit_access %}
             <td>
                 <a href="{% url 'planning:answer_plan_join_request' req_id=req.id accept='REJECT' %}"
@@ -72,7 +75,12 @@
                 {{ req.role }}
             </td>
             {% endif %}
-
+            <td>
+                {{ req.user_total_pay }}
+            </td>
+            <td>
+                {{ avgPay|sub:req.user_total_pay }}
+            </td>
         </tr>
         {% endfor %}
         </tbody>
@@ -86,8 +94,8 @@
         <tbody>
         {% for req in pending %}
         <tr>
-            <td>{{ req.first_name }}</td>
-            <td>{{ req.last_name }}</td>
+            <td>{{ req.getUser.first_name }}</td>
+            <td>{{ req.getUser.first_name }}</td>
             {% if edit_access %}
             <td>
                 <a href="{% url 'planning:answer_plan_join_request' req_id=req.id accept='ACCEPT' %}"

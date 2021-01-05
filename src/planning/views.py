@@ -81,7 +81,7 @@ def edit_plan_view(request, plan_id):
                 parti = PlanParticipant()
                 parti.user = plan.head_man_user
                 parti.plan = plan
-                parti.MemberStatus = str(PlanParticipant.MemberStatus.ACCEPTED)
+                parti.status = PlanParticipant.MemberStatus.ACCEPTED
                 parti.save()
 
             return HttpResponseRedirect(reverse('planning:plan_view',
@@ -151,8 +151,8 @@ def create_plan_view(request, club_id):
                 plan.club = club
 
                 parti.plan = plan
-                parti.MemberStatus = str(PlanParticipant.MemberStatus.ACCEPTED)
-
+                parti.status = PlanParticipant.MemberStatus.ACCEPTED
+                parti.role = "head man"
                 plan.save()
                 parti.save()
 
@@ -187,10 +187,17 @@ def plan_participant_preregister(request, plan_id):
 @login_required
 def plan_members_and_requests_view(request, plan_id):
     ## TODO for requests
-    plan = get_object_or_404(Plan, pk=plan_id)
+    plan = get_object_or_404(Plan, id=plan_id)
     members = PlanParticipant.objects.filter(plan=plan, status=str(PlanParticipant.MemberStatus.ACCEPTED))
 
     pending = PlanParticipant.objects.filter(plan=plan, status=str(PlanParticipant.MemberStatus.PENDING))
+    for m in members:
+        print(m.user_total_pay)
+    charges = Charge.objects.filter(plan=plan_id)
+    totalPlanCarges = 0
+    for p in charges:
+        totalPlanCarges += p.amount
+    totalPlanCarges /= charges.count()
 
     if not ClubMember.objects.filter(club=plan.club, user=request.user).count():
         return HttpResponseForbidden()
@@ -203,7 +210,8 @@ def plan_members_and_requests_view(request, plan_id):
                       'members': members,
                       'pending': pending if edit_access else [],
                       'plan': plan,
-                      'edit_access': edit_access
+                      'edit_access': edit_access,
+                      'avgPay': totalPlanCarges
                   })
 
 
@@ -231,7 +239,7 @@ def addDuty(request, plan_id, req_id):
 @login_required
 def Charges(request, plan_id):
     charges = Charge.objects.filter(plan=plan_id)
-    plan = get_object_or_404(Plan, pk=plan_id)
+    plan = get_object_or_404(Plan, id=plan_id)
     totalPlanCarges = 0
     for p in charges:
         totalPlanCarges += p.amount

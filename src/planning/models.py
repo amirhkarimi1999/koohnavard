@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 from markdownx.models import MarkdownxField
 # Create your models here.
+from accounts.models import UserProfile
 
 
 class Plan(models.Model):
@@ -14,7 +15,7 @@ class Plan(models.Model):
     start_datetime = models.DateTimeField(verbose_name=_('start_datetime'))
     head_man = models.CharField(max_length=256, null=False, default="", verbose_name=_('head_man'))
     group_link = models.URLField(default="", verbose_name=_('group_link'))
-    report = MarkdownxField(null=True)
+    report = MarkdownxField(default="")
 
     def __str__(self):
         return str(self.title) + " " + str(self.club)
@@ -55,3 +56,14 @@ class PlanParticipant(models.Model):
     isDutySeen = models.BooleanField(default=False, verbose_name=_('isDutyseen'))
     role = models.CharField(max_length=40, null=True, verbose_name=_('role'))
 
+    @property
+    def getUser(self):
+        return UserProfile.objects.get(user=self.user)
+
+    @property
+    def user_total_pay(self):
+        charges = Charge.objects.filter(plan=self.plan, user=self.user)
+        totalPlanCarges = 0
+        for p in charges:
+            totalPlanCarges += p.amount
+        return totalPlanCarges

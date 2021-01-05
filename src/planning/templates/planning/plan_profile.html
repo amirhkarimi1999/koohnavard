@@ -34,6 +34,10 @@
         {% endif %}
 
     {% else %}
+        <a href="{% url 'planning:addCharge' plan_id=plan.id %}">
+                {% trans "add a new charge report" %}
+            </a>
+            <hr class="club-ops-hr">
         <a href="{% url 'planning:plan_edit' plan_id=plan.id %}">
             {% trans "edit" %}
         </a>
