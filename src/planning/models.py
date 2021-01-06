@@ -74,3 +74,12 @@ class PlanNotification(models.Model):
     description = models.CharField(max_length=256, null=False, default="", verbose_name=_('description'))
     time = models.DateTimeField(verbose_name=_('time'))
     isSeen = models.IntegerField(default=2, verbose_name=_('isSeen'))
+
+
+class PlanPicture(models.Model):
+    plan = models.ForeignKey('planning.Plan', null=False, on_delete=models.DO_NOTHING, verbose_name=_('club'))
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name=_('user'))
+    title = models.CharField(max_length=50, null=False, default="", verbose_name=_('title'))
+    caption = models.CharField(max_length=256, null=False, default="", verbose_name=_('caption'))
+    image = models.ImageField(null=False, verbose_name=_('image'), upload_to='plan_pictures')
+    isPublic = models.BooleanField(default=False, verbose_name=_('isPublic'))

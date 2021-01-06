@@ -14,6 +14,7 @@ urlpatterns = [
     path('<int:plan_id>/members/', views.plan_members_and_requests_view, name='plan_join_members_and_requests'),
     path('<int:plan_id>/charges/', views.Charges, name='charges'),
     path('<int:plan_id>/addcharge/', views.addCharge, name='addCharge'),
+    path('<int:plan_id>/addpicture/', views.addPicture, name='addPicture'),
     path('admin/reqs/answer/<int:req_id>/<str:accept>/', views.answer_request_view, name='answer_plan_join_request'),
     path('<int:plan_id>/addduty/<int:req_id>/', views.addDuty, name='addDuty'),
     path('<int:plan_id>/addrole/<int:req_id>/', views.addRole, name='addRole'),

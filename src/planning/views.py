@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 
 from accounts.models import UserProfile
 from participation.models import Club, ClubMember
-from .forms import PlanForm, ReportForm, ChargeForm
+from .forms import PlanForm, ReportForm, ChargeForm, PlanPictureForm
 from .models import Plan, PlanParticipant, Charge, PlanNotification
 
 
@@ -115,7 +115,8 @@ def addCharge(request, plan_id):
         else:
             charge_form = ChargeForm()
 
-    return render(request, 'planning/add_charge.html', {'plan': plan, 'charge_form': charge_form})
+        return render(request, 'planning/add_charge.html', {'plan': plan, 'charge_form': charge_form})
+    return HttpResponseForbidden()
 
 @login_required
 def detail_plan_view(request, plan_id):
@@ -264,3 +265,22 @@ def addRole(request, plan_id, req_id):
                                     time=timezone.now()).save()
     return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan_id,)))
 
+
+@login_required
+def addPicture(request, plan_id):
+    plan = get_object_or_404(Plan, pk=plan_id)
+    if PlanParticipant.objects.filter(plan=plan, user=request.user).count():
+        if request.method == 'POST':
+            picture_form = PlanPictureForm(request.POST, request.FILES)
+            if picture_form.is_valid():
+                picture = picture_form.save(commit=False)
+                picture.plan = plan
+                picture.user = request.user
+
+                picture.save()
+                return HttpResponseRedirect(reverse('planning:plan_view',
+                                                    args=[plan.id]))
+        else:
+            picture_form = PlanPictureForm()
+        return render(request, 'planning/add_picture.html', {'plan': plan, 'form': picture_form})
+    return HttpResponseForbidden()

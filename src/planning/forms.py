@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Plan, PlanParticipant, Charge
+from .models import Plan, PlanParticipant, Charge, PlanPicture
 from markdownx.fields import MarkdownxFormField
 
 
@@ -16,5 +16,10 @@ class ChargeForm(forms.ModelForm):
 
 class ReportForm(forms.Form):
     report = MarkdownxFormField()
+
+class PlanPictureForm(forms.ModelForm):
+    class Meta:
+        model = PlanPicture
+        fields = ['title', 'image', 'caption']
 
 
