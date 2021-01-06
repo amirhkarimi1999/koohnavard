@@ -10,7 +10,7 @@ from django.utils.translation import gettext as _
 from accounts.models import UserProfile
 from participation.models import Club, ClubMember
 from .forms import PlanForm, ReportForm, ChargeForm, PlanPictureForm
-from .models import Plan, PlanParticipant, Charge, PlanNotification
+from .models import Plan, PlanParticipant, Charge, PlanNotification, PlanPicture
 
 
 def plans_list_view(request, club_id=0):
@@ -284,3 +284,9 @@ def addPicture(request, plan_id):
             picture_form = PlanPictureForm()
         return render(request, 'planning/add_picture.html', {'plan': plan, 'form': picture_form})
     return HttpResponseForbidden()
+
+@login_required
+def showPictures(request, plan_id):
+    plan = get_object_or_404(Plan, pk=plan_id)
+    pictures = PlanPicture.objects.filter(plan=plan, isPublic=True)
+    return render(request, 'planning/plan_pictures.html', {'pictures': pictures, 'plan': plan})

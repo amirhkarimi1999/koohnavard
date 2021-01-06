@@ -55,7 +55,10 @@
         </a>
 
     {% endif %}
-
+        <hr class="club-ops-hr">
+        <a href="{% url 'planning:pictures' plan_id=plan.id %}">
+            {% trans "pictures" %}
+        </a>
 
 </div>
 <div class="col-sm-7">
