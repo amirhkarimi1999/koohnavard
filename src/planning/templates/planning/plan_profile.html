@@ -42,6 +42,10 @@
                 {% trans "add a new charge report" %}
             </a>
             <hr class="club-ops-hr">
+        <a href="{% url 'planning:managePictures' plan_id=plan.id %}">
+                {% trans "manage pictures" %}
+            </a>
+            <hr class="club-ops-hr">
         <a href="{% url 'planning:addPicture' plan_id=plan.id %}">
                 {% trans "add a new picture" %}
             </a>

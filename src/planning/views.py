@@ -316,5 +316,41 @@ def showPictures(request, plan_id):
     pictures = PlanPicture.objects.filter(plan=plan, isPublic=True)
     return render(request, 'planning/plan_pictures.html', {'pictures': pictures, 'plan': plan})
 
-# @login_required
-# def reportSpam(request, plan_id)
+@login_required
+def managePictures(request, plan_id):
+    plan = get_object_or_404(Plan, pk=plan_id)
+    if plan.head_man_user == request.user:
+        pictures = PlanPicture.objects.filter(plan=plan)
+        return render(request, 'planning/manage_pictures.html', {'pictures': pictures, 'plan': plan})
+    else:
+        return HttpResponseForbidden()
+
+@login_required
+def publicPicture(request, plan_id, pic_id):
+    plan = get_object_or_404(Plan, pk=plan_id)
+    if plan.head_man_user == request.user:
+        picture = PlanPicture.objects.get(id=pic_id)
+        picture.isPublic = bool(request.POST.get('public'))
+        picture.save()
+        return HttpResponseRedirect(reverse('planning:managePictures', args=(plan_id,)))
+    else:
+        return HttpResponseForbidden()
+
+@login_required
+def reportSpam(request, plan_id):
+    plan = get_object_or_404(Plan, pk=plan_id)
+    if request.method == 'POST':
+        text = request.POST.get('spam')
+        PlanNotification(user=plan.head_man_user,
+                         plan=plan,
+                         title='picture report',
+                         description=text,
+                         time=timezone.now()).save()
+        PlanNotification(user=plan.club.owner,
+                         plan=plan,
+                         title='picture report',
+                         description=text,
+                         time=timezone.now()).save()
+        return HttpResponseRedirect(reverse('planning:pictures', args=(plan_id,)))
+    else:
+        return render(request, 'planning/report_spam.html', {'plan': plan})

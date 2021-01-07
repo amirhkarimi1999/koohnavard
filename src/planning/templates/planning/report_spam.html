@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load i18n %}
+
+{% block title %}
+<li class="breadcrumb-item">
+    <a href="{% url 'planning:all_plans_list' %}">
+        {% trans "plans" %}
+    </a>
+</li>
+
+<li class="breadcrumb-item">
+    <a href="{% url 'participation:club_view' club_id=plan.club.id %}">
+        {{ plan.club }}
+    </a>
+</li>
+<li class="breadcrumb-item">
+    <a href="{% url 'planning:plan_view' plan_id=plan.id %}">
+        {{ plan.title }}
+    </a>
+</li>
+
+<li class="breadcrumb-item active">
+    {% trans "report spam" %}
+</li>
+{% endblock %}
+
+
+{% block content %}
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+    <div class="card card-form">
+        <div class="card-header">
+            {% trans "report spam" %}
+        </div>
+        <div class="card-body">
+                    <form method="post" action="{% url 'planning:reportSpam' plan_id=plan.id %}">
+                        {% csrf_token %}
+                        <input type="text"  class="form-control" name="spam" value="report spam">
+                        <button type="submit" class="btn btn-primary">save</button>
+                    </form>
+                </div>
+    </div>
+</div>
+<div class="col-sm-3"></div>
+{% endblock %}
+
