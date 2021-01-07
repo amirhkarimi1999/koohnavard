@@ -18,13 +18,18 @@
 </div>
 <hr class="sidebar-hr" />
 <div class="navbar menu-item">
-    <a href="{% url 'accounts:inbox' %}" class="btn btn-link text-menuitem">
-        {% trans "Inbox" %}
-    </a>
-    <!--  unseen notifs  -->
     {% unseen_notifs user.id as notifs %}
     {% if notifs != 0 %}
-        <div>{{ notifs }}</div>
+        <span>
+        <a href="{% url 'accounts:inbox' %}" class="btn btn-link text-menuitem">
+            <strong>{% trans "Inbox" %}</strong>
+        </a>
+            </span>
+        <span class="badge badge-primary">{{ notifs }}</span>
+    {% else %}
+        <a href="{% url 'accounts:inbox' %}" class="btn btn-link text-menuitem">
+            {% trans "Inbox" %}
+        </a>
     {% endif %}
 </div>
 <hr class="sidebar-hr" />

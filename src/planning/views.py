@@ -193,8 +193,7 @@ def plan_members_and_requests_view(request, plan_id):
     members = PlanParticipant.objects.filter(plan=plan, status=str(PlanParticipant.MemberStatus.ACCEPTED))
 
     pending = PlanParticipant.objects.filter(plan=plan, status=str(PlanParticipant.MemberStatus.PENDING))
-    for m in members:
-        print(m.user_total_pay)
+
     charges = Charge.objects.filter(plan=plan_id)
     totalPlanCarges = 0
     for p in charges:
@@ -235,7 +234,7 @@ def addDuty(request, plan_id, req_id):
     pp = get_object_or_404(PlanParticipant, pk=req_id)
     pp.duty = request.POST.get('duty')
     pp.save()
-    PlanNotification(user=request.user,
+    PlanNotification(user=pp.user,
                                     plan=get_object_or_404(Plan, id=plan_id),
                                     title='new Duty',
                                     description=pp.duty,
@@ -258,7 +257,7 @@ def addRole(request, plan_id, req_id):
     pp = get_object_or_404(PlanParticipant, pk=req_id)
     pp.role = request.POST.get('role')
     pp.save()
-    PlanNotification(user=request.user,
+    PlanNotification(user=pp.user,
                                     plan=get_object_or_404(Plan, id=plan_id),
                                     title='new role assigned',
                                     description=pp.role,
