@@ -3,6 +3,7 @@
 {% load static %}
 {% load i18n %}
 {% load mathfilters %}
+{% load custom_tags %}
 
 {% block menu %}
 
@@ -20,6 +21,11 @@
     <a href="{% url 'accounts:inbox' %}" class="btn btn-link text-menuitem">
         {% trans "Inbox" %}
     </a>
+    <!--  unseen notifs  -->
+    {% unseen_notifs user.id as notifs %}
+    {% if notifs != 0 %}
+        <div>{{ notifs }}</div>
+    {% endif %}
 </div>
 <hr class="sidebar-hr" />
 <div class="navbar menu-item">

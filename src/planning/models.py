@@ -15,7 +15,7 @@ class Plan(models.Model):
     start_datetime = models.DateTimeField(verbose_name=_('start_datetime'))
     head_man = models.CharField(max_length=256, null=False, default="", verbose_name=_('head_man'))
     group_link = models.URLField(default="", verbose_name=_('group_link'))
-    report = MarkdownxField(default="")
+    # report = MarkdownxField(default="")
 
     def __str__(self):
         return str(self.title) + " " + str(self.club)
@@ -37,6 +37,7 @@ class Charge(models.Model):
     title = models.CharField(max_length=50, null=False, default="", verbose_name=_('title'))
     description = models.CharField(max_length=256, null=False, default="", verbose_name=_('description'))
     amount = models.DecimalField(max_digits=20, decimal_places=0, null=False, verbose_name=_('amount'))
+
 
 class PlanParticipant(models.Model):
     class MemberStatus(models.TextChoices):
