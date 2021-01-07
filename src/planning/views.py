@@ -182,6 +182,18 @@ def plan_participant_preregister(request, plan_id):
     if PlanParticipant.objects.filter(user=request.user).filter(plan=plan).count():
         return HttpResponseBadRequest("you are already a part of this plan!")
     PlanParticipant.objects.create(user=request.user, status=str(PlanParticipant.MemberStatus.PENDING), plan=plan)
+    text = '{user} wants to join to your club'.format(user=request.user)
+    PlanNotification(user=plan.club.owner,
+                     plan=plan,
+                     title='plan join request',
+                     description=text,
+                     time=timezone.now()).save()
+    PlanNotification(user=plan.head_man_user,
+                     plan=plan,
+                     title='plan join request',
+                     description=text,
+                     time=timezone.now()).save()
+
     return HttpResponseRedirect(reverse('planning:plan_view',
                                         args=[plan.id]))
 
@@ -264,6 +276,20 @@ def addRole(request, plan_id, req_id):
                                     time=timezone.now()).save()
     return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan_id,)))
 
+@login_required
+def recordCriticism(request, plan_id, user_id):
+    user = get_object_or_404(User, id=user_id)
+    plan = get_object_or_404(Plan, id=plan_id)
+    if request.method == 'POST':
+        criticism = request.POST.get('criticism')
+        PlanNotification(user=user,
+                         plan=plan,
+                         title='new criticism',
+                         description=criticism,
+                         time=timezone.now()).save()
+        return HttpResponseRedirect(reverse('planning:plan_join_members_and_requests', args=(plan_id,)))
+    else:
+        return render(request, 'planning/record_criticism.html', {'user': user, 'plan': plan})
 
 @login_required
 def addPicture(request, plan_id):
@@ -289,3 +315,6 @@ def showPictures(request, plan_id):
     plan = get_object_or_404(Plan, pk=plan_id)
     pictures = PlanPicture.objects.filter(plan=plan, isPublic=True)
     return render(request, 'planning/plan_pictures.html', {'pictures': pictures, 'plan': plan})
+
+# @login_required
+# def reportSpam(request, plan_id)

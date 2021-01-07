@@ -2,9 +2,10 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponseForbidden, HttpResponseBadRequest
+from django.utils import timezone
 
 from accounts.models import UserProfile
-from planning.models import PlanParticipant
+from planning.models import PlanParticipant, PlanNotification
 from .models import Club, ClubMember
 from .forms import ClubForm
 

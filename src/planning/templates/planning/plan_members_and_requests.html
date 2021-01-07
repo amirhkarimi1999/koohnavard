@@ -36,6 +36,7 @@
             <th>{% trans "role" %}</th>
             <th>{% trans "total payed" %}</th>
             <th>{% trans "should pay" %}</th>
+            <th>{% trans "record criticism" %}</th>
         </tr>
         <tbody>
         {% for req in members %}
@@ -67,6 +68,7 @@
                 </div>
 
             </td>
+
             {% else %}
             <td>
                 {{ req.duty }}
@@ -80,6 +82,11 @@
             </td>
             <td>
                 {{ avgPay|sub:req.user_total_pay }}
+            </td>
+            <td>
+                <a class="btn btn-default" href="{% url 'planning:addCriticism' plan_id=plan.id user_id=req.user.id %}">
+                    {% trans "add" %}
+                </a>
             </td>
         </tr>
         {% endfor %}
