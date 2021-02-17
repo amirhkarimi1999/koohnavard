@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from markdownx.models import MarkdownxField
 # Create your models here.
 from accounts.models import UserProfile
+import datetime
 
 
 class Plan(models.Model):
@@ -12,7 +13,7 @@ class Plan(models.Model):
     description = models.CharField(max_length=256, null=False, default="", verbose_name=_('description'))
     destination_address = models.CharField(max_length=256, null=False, default="",
                                            verbose_name=_('destination_address'))
-    start_datetime = models.DateTimeField(verbose_name=_('start_datetime'))
+    start_datetime = models.DateTimeField(verbose_name=_('start_datetime'), default=datetime.date.today)
     head_man = models.CharField(max_length=256, null=False, default="", verbose_name=_('head_man'))
     group_link = models.URLField(default="", verbose_name=_('group_link'))
     # report = MarkdownxField(default="")
