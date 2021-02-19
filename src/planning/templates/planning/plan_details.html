@@ -29,12 +29,13 @@
             {% trans "Plan Report" %}
         </div>
         <div class="card-body">
-
-            <form method="post" action="{% url 'planning:plan_details' plan_id=plan.id %}">
-                {% csrf_token %}
-                {{ form|crispy }}
-                <input name="" type="submit" class="btn btn-primary" value="{% trans 'edit' %}"/>
-            </form>
+            {% if edit_access %}
+                <form method="post" action="{% url 'planning:plan_details' plan_id=plan.id %}">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input name="" type="submit" class="btn btn-primary" value="{% trans 'edit' %}"/>
+                </form>
+            {% endif %}
             {{ form.media }}
 
         </div>
