@@ -15,29 +15,30 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
-from django.shortcuts import render
 from django.contrib.auth import views as auth_views
+from django.shortcuts import render
+from django.urls import path, include
 
 from koohnavard import settings
 
 urlpatterns = [
-    path('', include('home.urls', namespace='home')),
-    path('admin/', admin.site.urls),
-    path('plan/', include('planning.urls', namespace="planning")),
-    path('club/', include('participation.urls', namespace='participation')),
-    path('accounts/', include('accounts.urls', namespace='accounts')),
-    path('test', lambda req: render(req, 'base.html', {}), name='test'),
+                  path('', include('home.urls', namespace='home')),
+                  path('admin/', admin.site.urls),
+                  path('plan/', include('planning.urls', namespace="planning")),
+                  path('club/', include('participation.urls', namespace='participation')),
+                  path('accounts/', include('accounts.urls', namespace='accounts')),
+                  path('test', lambda req: render(req, 'base.html', {}), name='test'),
+                  path('markdownx/', include('markdownx.urls')),
 
+                  # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
+                  path('password_change/done/',
+                       auth_views.PasswordChangeDoneView.as_view(
+                           template_name='accounts/registration/password_change_done.html'),
+                       name='password_change_done'),
 
-
-    # Password reset links (ref: https://github.com/django/django/blob/master/django/contrib/auth/views.py)
-    path('password_change/done/',
-         auth_views.PasswordChangeDoneView.as_view(template_name='accounts/registration/password_change_done.html'),
-         name='password_change_done'),
-
-    path('password_change/', auth_views.PasswordChangeView.as_view(template_name='accounts/registration/password_change.html'),
-         name='password_change'),
+                  path('password_change/', auth_views.PasswordChangeView.as_view(
+                      template_name='accounts/registration/password_change.html'),
+                       name='password_change'),
 
     path('password_reset/done/',
          auth_views.PasswordResetCompleteView.as_view(template_name='accounts/registration/password_reset_done.html'),

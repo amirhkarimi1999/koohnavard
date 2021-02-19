@@ -9,7 +9,7 @@ from django.utils.translation import gettext as _
 
 from accounts.models import UserProfile
 from participation.models import Club, ClubMember
-from .forms import PlanForm, ReportForm, ChargeForm, PlanPictureForm
+from .forms import PlanForm, ChargeForm, PlanPictureForm, ReportForm
 from .models import Plan, PlanParticipant, Charge, PlanNotification, PlanPicture
 
 
@@ -125,9 +125,11 @@ def detail_plan_view(request, plan_id):
     if plan.head_man_user == request.user or plan.club.owner == request.user:
         edit_access = True
     if request.method == 'POST':
-        plan.report = request.POST['report']
-        plan.save()
-    form = ReportForm()
+        form = ReportForm(request.POST)
+        if form.is_valid():
+            plan.report = form.cleaned_data['report']
+            plan.save()
+    form = ReportForm({'report': plan.report})
     return render(request,
                   'planning/plan_details.html',
                   {'form': form, 'plan': plan, 'edit_access': edit_access})

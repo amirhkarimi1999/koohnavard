@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mathfilters',
     'crispy_forms',
+    'markdownx',
 
     # My Apps
     'home',

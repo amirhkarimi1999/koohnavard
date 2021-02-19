@@ -1,10 +1,12 @@
+import datetime
+
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import gettext as _
 from markdownx.models import MarkdownxField
+
 # Create your models here.
 from accounts.models import UserProfile
-import datetime
 
 
 class Plan(models.Model):
@@ -16,7 +18,7 @@ class Plan(models.Model):
     start_datetime = models.DateTimeField(verbose_name=_('start_datetime'), default=datetime.date.today)
     head_man = models.CharField(max_length=256, null=False, default="", verbose_name=_('head_man'))
     group_link = models.URLField(default="", verbose_name=_('group_link'))
-    # report = MarkdownxField(default="")
+    report = MarkdownxField(default='')
 
     def __str__(self):
         return str(self.title) + " " + str(self.club)
